@@ -1,9 +1,10 @@
 import './App.css';
+import Onboarding from '../src/components/onboarding/Onboarding'
 
 function App() {
   return (
     <div className="App">
-      pension central application
+      <Onboarding/>
     </div>
   );
 }
