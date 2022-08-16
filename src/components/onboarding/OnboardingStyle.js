@@ -22,10 +22,12 @@ export const BrandAdd = styled.div`
 `;
 export const PensionLogo = styled.img`
   position: absolute;
-  width: 246px;
-  height: 101px;
+  // width: 246px;
+  // height: 101px;
+  width: 200px;
+  height: 80px;
   z-index: 1000;
-  left: 20%;
+  left: 25%;
   top: 40%;
 `;
 export const PensionImage = styled.img`
