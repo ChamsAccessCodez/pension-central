@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
+import ResetPassword from "../resetPassword/ResetPassword"
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -14,8 +15,19 @@ import {
 } from "./SignInStyle";
 
 function SignIn({ toggle, toggleReset }) {
+  const [check, setCheck] = useState(false)
+
+  // toggle state
+  const toggleForm = () =>{
+    setCheck(!check)
+  }
+
   return (
-    <SignUpWrapper>
+    <>
+    { check ?
+      <ResetPassword toggleForm={toggleForm} />
+       : (
+      <SignUpWrapper>
       <SignUpContent>
         <SignUpHeader>sign in</SignUpHeader>
         <InputWrapper>
@@ -39,10 +51,12 @@ function SignIn({ toggle, toggleReset }) {
         </Switcher>
         <Switcher2>
           Forgot password?
-          <span onClick={toggleReset}>Reset Password</span>
+          <span onClick={toggleForm}>Reset Password</span>
         </Switcher2>
       </SignUpContent>
     </SignUpWrapper>
+    )}
+    </>
   );
 }
 

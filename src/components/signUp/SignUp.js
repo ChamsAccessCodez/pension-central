@@ -40,7 +40,7 @@ function SignUp({ toggle }) {
         </Button>
         <Switcher>
           Already have account?
-          <span onClick={toggle}>Login</span>
+          <span onClick={toggle}>Sign In</span>
         </Switcher>
       </SignUpContent>
     </SignUpWrapper>
