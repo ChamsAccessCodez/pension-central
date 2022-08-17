@@ -72,7 +72,7 @@ export const Input = styled.input`
     line-height: 18px;
   }
 `;
-export const Button = styled.div`
+export const Button = styled.button`
   background: #2b93f3;
   border-radius: 4px;
   width: 100%;
@@ -81,6 +81,7 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: none;
 `;
 export const Text = styled.div`
   font-family: "Poppins";

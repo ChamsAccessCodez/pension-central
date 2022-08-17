@@ -23,7 +23,7 @@ import {
 } from "./SignUpStyle";
 
 function SignUp({ toggle }) {
-  // useerSignUp with react-hook-form
+  // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
     companyName: yup.string().required("Company name cannot be empty"),
     email: yup.string().required("Email address cannot be empty"),
@@ -98,7 +98,10 @@ function SignUp({ toggle }) {
         <SignUpHeader>sign up</SignUpHeader>
         <ErrorMessage errors={errors} name="companyName" message="Company name is required." /> 
         <InputWrapper>
-          <FaHouseUser marginLeft="50px" marginRight="50px" color="#000000" />
+          <FaHouseUser 
+          marginLeft="50px" 
+          marginRight="50px" 
+          color="#000000" />
           <Input placeholder="Company Name" {...register("companyName", {required: 'This is a required field'})} />
         </InputWrapper>
         {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
@@ -112,7 +115,10 @@ function SignUp({ toggle }) {
         </InputWrapper>
         {/* <ErrorMessage>{errors.phone.message}</ErrorMessage> */}
         <InputWrapper>
-          <FaPhoneAlt marginLeft="50px" marginRight="50px" color="#000000" />
+          <FaPhoneAlt 
+          marginLeft="50px" 
+          marginRight="50px" 
+          color="#000000" />
           <Input placeholder="Phone" {...register("phone")} />
         </InputWrapper>
         <Button
