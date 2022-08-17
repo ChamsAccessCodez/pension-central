@@ -55,7 +55,6 @@ export const Input = styled.input`
   :focus {
     border: 1px solid #0b9444;
     border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   :hover {
     border: 1px solid #2b93f3;
@@ -112,9 +111,9 @@ export const Switcher = styled.div`
   }
 `;
 export const ErrorMessage = styled.div`
-font-size: smaller;
-color: red;
-width: 100%;
-margin-bottom: 5px;
+  font-size: smaller;
+  color: red;
+  width: 100%;
+  margin-bottom: 5px;
 `;
 // export const SignUpWrapper = styled.div``;
