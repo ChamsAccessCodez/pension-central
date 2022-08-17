@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaEnvelopeOpen } from "react-icons/fa";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaEnvelopeOpen, FaLock } from "react-icons/fa";
 import ResetPassword from "../resetPassword/ResetPassword";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -109,7 +108,7 @@ function SignIn({ toggle }) {
               />
             </InputWrapper>
             <InputWrapper>
-              <FaPhoneAlt
+              <FaLock
                 marginLeft="50px"
                 marginRight="50px"
                 color="#000000"

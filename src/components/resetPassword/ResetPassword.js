@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEnvelopeOpen, FaLock } from "react-icons/fa";
+import { FaEnvelopeOpen} from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
