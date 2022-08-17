@@ -61,19 +61,19 @@ function SignIn({ toggle }) {
         data: {
           clientId: email,
           secretKey: secret,
-        }
+        },
       });
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Successful",
-          text: "Explore your dashboard!!!",
-          timer: 3000,
-        }).then(() => {
-          navigate("/");
-          window.location.reload(false)
-        });
-        console.log(data.data);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Successful",
+        text: "Explore your dashboard!!!",
+        timer: 3000,
+      }).then(() => {
+        navigate("/");
+        window.location.reload(false);
+      });
+      console.log(data.data);
     } catch (error) {
       console.log(error.response);
       Swal.fire({
@@ -108,13 +108,10 @@ function SignIn({ toggle }) {
               />
             </InputWrapper>
             <InputWrapper>
-              <FaLock
-                marginLeft="50px"
-                marginRight="50px"
-                color="#000000"
-              />
+              <FaLock marginLeft="50px" marginRight="50px" color="#000000" />
               <Input
-                placeholder="Secret"
+                type="password"
+                placeholder="Secret Key"
                 {...register("secret", { required: "This is required" })}
               />
             </InputWrapper>
