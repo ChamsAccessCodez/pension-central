@@ -9,7 +9,10 @@ export const SignUpWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  
+  @media (max-width: 768px) {
+    // background: tomato;
+  }
+
 `;
 export const SignUpContent = styled.div`
   // background: red;
@@ -18,8 +21,29 @@ export const SignUpContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: left;
+  // align-items: left;
+
+  @media (max-width: 768px) {
+    // background: yellow;
+  }
+  @media (max-width: 425px) {
+  }
+  @media (max-width: 375px) {
+    width: 80%;
+  }
+  @media (max-width: 320px) {
+    width: 90%;
+  }
 `;
+
+// export const PensionLogo = styled.img`
+//   display: flex;
+//   align-self: center;
+//   width: 120px;
+//   height: 50px;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+// `;
 export const SignUpHeader = styled.div`
   width: 100%;
   height: 40px;

@@ -11,6 +11,7 @@ import { FaHouseUser } from "react-icons/fa";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import ClipLoader from "react-spinners/BeatLoader";
+// import PenLogo from "../../images/pension-central-logo.png";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -21,6 +22,7 @@ import {
   Text,
   Switcher,
   ErrorMessage,
+  // PensionLogo,
 } from "./SignUpStyle";
 
 // loader CSS
@@ -121,6 +123,7 @@ function SignUp({ toggle }) {
       />
       ) : (
         <SignUpContent>
+        {/* <PensionLogo src={PenLogo} alt="happy girl" /> */}
         <SignUpHeader>sign up</SignUpHeader>
         <ErrorMessage
           errors={errors}

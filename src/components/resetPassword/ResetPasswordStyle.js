@@ -8,6 +8,10 @@ export const SignUpWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    // background: tomato;
+  }
 `;
 export const SignUpContent = styled.div`
   // background: red;
@@ -17,6 +21,18 @@ export const SignUpContent = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
+
+  @media (max-width: 768px) {
+    // background: yellow;
+  }
+  @media (max-width: 425px) {
+  }
+  @media (max-width: 375px) {
+    width: 80%;
+  }
+  @media (max-width: 320px) {
+    width: 90%;
+  }
 `;
 export const SignUpHeader = styled.div`
   width: 100%;

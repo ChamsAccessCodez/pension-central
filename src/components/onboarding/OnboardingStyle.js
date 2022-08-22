@@ -14,8 +14,16 @@ export const BoardContent = styled.div`
   height: 70%;
   display: flex;
 
-  @media and screen(max-width: 960px){
-    
+  @media (max-width: 768px) {
+    // background: red;
+    width: 70%;
+  }
+  @media (max-width: 425px) {
+    width: 90%;
+  }
+  @media (max-width: 375px) {
+  }
+  @media (max-width: 320px) {
   }
 `;
 export const BrandAdd = styled.div`
@@ -23,6 +31,12 @@ export const BrandAdd = styled.div`
   position: relative;
   width: 50%;
   height: 100%;
+
+  @media (max-width: 960px) {
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const PensionLogo = styled.img`
   position: absolute;
@@ -53,6 +67,39 @@ export const BrandForm = styled.div`
   background: #ffffff;
   flex: 1;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    // background: red;
+    width: 100%;
+  }
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+`;
+
+export const PensionLogo2 = styled.img`
+  display: flex;
+  // align-self: center;
+  width: 120px;
+  height: 50px;
+  // margin-top: 20px;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    width: 150px;
+    height: 70px;
+  }
+  @media (min-width: 425px) {
+  }
+  @media (min-width: 375px) {
+  }
+  @media (min-width: 320px) {
+    margin-bottom: 10px;
+  }
 `;
 // export const BoardContent = styled.div`
 // `;
