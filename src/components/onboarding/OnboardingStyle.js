@@ -13,6 +13,10 @@ export const BoardContent = styled.div`
   width: 60%;
   height: 70%;
   display: flex;
+
+  @media and screen(max-width: 960px){
+    
+  }
 `;
 export const BrandAdd = styled.div`
   background: rgba(236, 236, 236, 0.5);

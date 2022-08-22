@@ -8,6 +8,8 @@ export const SignUpWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  
 `;
 export const SignUpContent = styled.div`
   // background: red;

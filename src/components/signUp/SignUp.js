@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +10,7 @@ import "sweetalert2/dist/sweetalert2.css";
 import { FaHouseUser } from "react-icons/fa";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
+import ClipLoader from "react-spinners/BeatLoader";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -22,7 +23,25 @@ import {
   ErrorMessage,
 } from "./SignUpStyle";
 
+// loader CSS
+const override = {
+  // display: "block",
+  // margin: "0 auto",
+  // borderColor: "red",
+  // backgroundColor: "brown",
+  width: "inherit",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  alignSelf: "center",
+};
+
 function SignUp({ toggle }) {
+  const [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("green");
+
+
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
     companyName: yup.string().required("Company name cannot be empty"),
@@ -35,7 +54,7 @@ function SignUp({ toggle }) {
     handleSubmit,
     formState: { errors },
     reset,
-  // } = useForm();
+    // } = useForm();
   } = useForm({
     resolver: yupResolver(userSchema),
   });
@@ -67,14 +86,13 @@ function SignUp({ toggle }) {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title:
-          "Registration Successful! ",
+        title: "Registration Successful! ",
         text: "Please check your email for your login details.",
         showConfirmButton: true,
         // timer: 1500
       }).then(() => {
         navigate("/");
-        window.location.reload(false)
+        window.location.reload(false);
       });
       console.log(data.data);
     } catch (error) {
@@ -85,24 +103,38 @@ function SignUp({ toggle }) {
         title: "Oops...",
         text: error.response.data.responseMessage,
         // text: error.response.data.responseMessage,
-      }).then(()=>{
-        navigate("/")
-        window.location.reload(false)
+      }).then(() => {
+        navigate("/");
+        window.location.reload(false);
       });
     }
   });
 
   return (
     <SignUpWrapper>
-      <SignUpContent>
+      {loading ? (
+        <ClipLoader
+        color={color}
+        loading={loading}
+        cssOverride={override}
+        size={10}
+      />
+      ) : (
+        <SignUpContent>
         <SignUpHeader>sign up</SignUpHeader>
-        <ErrorMessage errors={errors} name="companyName" message="Company name is required." /> 
+        <ErrorMessage
+          errors={errors}
+          name="companyName"
+          message="Company name is required."
+        />
         <InputWrapper>
-          <FaHouseUser 
-          marginLeft="50px" 
-          marginRight="50px" 
-          color="#000000" />
-          <Input placeholder="Company Name" {...register("companyName", {required: 'This is a required field'})} />
+          <FaHouseUser marginLeft="50px" marginRight="50px" color="#000000" />
+          <Input
+            placeholder="Company Name"
+            {...register("companyName", {
+              required: "This is a required field",
+            })}
+          />
         </InputWrapper>
         {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
         <InputWrapper>
@@ -115,16 +147,13 @@ function SignUp({ toggle }) {
         </InputWrapper>
         {/* <ErrorMessage>{errors.phone.message}</ErrorMessage> */}
         <InputWrapper>
-          <FaPhoneAlt 
-          marginLeft="50px" 
-          marginRight="50px" 
-          color="#000000" />
+          <FaPhoneAlt marginLeft="50px" marginRight="50px" color="#000000" />
           <Input placeholder="Phone" {...register("phone")} />
         </InputWrapper>
         <Button
           type="submit"
           onClick={() => {
-            console.log("cynthia");
+            setLoading(!loading);
             onSubmit();
           }}
         >
@@ -135,6 +164,7 @@ function SignUp({ toggle }) {
           <span onClick={toggle}>Sign In</span>
         </Switcher>
       </SignUpContent>
+      )}
     </SignUpWrapper>
   );
 }

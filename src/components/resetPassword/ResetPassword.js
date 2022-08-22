@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaEnvelopeOpen} from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import * as yup from "yup";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import ClipLoader from "react-spinners/BeatLoader";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -18,7 +19,24 @@ import {
   Switcher,
 } from "./ResetPasswordStyle";
 
+// loader CSS
+const override = {
+  // display: "block",
+  // margin: "0 auto",
+  // borderColor: "red",
+  // backgroundColor: "brown",
+  width: "inherit",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  alignSelf: "center",
+};
+
 function ResetPassword({ toggleForm }) {
+  const [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("green");
+
   // resetPassword with react-hook-form
   const resetSchema = yup.object().shape({
     email: yup.string().required("Email address cannot be empty"),
@@ -71,6 +89,7 @@ function ResetPassword({ toggleForm }) {
         icon: "error",
         title: "Oops...",
         text: error.response.data.responseMessage,
+        showConfirmButton: true,
       }).then(() => {
         navigate("/");
         window.location.reload(false);
@@ -79,7 +98,15 @@ function ResetPassword({ toggleForm }) {
   });
   return (
     <SignUpWrapper>
-      <SignUpContent>
+      {loading ? (
+                <ClipLoader
+                color={color}
+                loading={loading}
+                cssOverride={override}
+                size={10}
+              />
+      ) : (
+        <SignUpContent>
         <SignUpHeader>reset password</SignUpHeader>
         <InputWrapper>
           <FaEnvelopeOpen
@@ -87,11 +114,12 @@ function ResetPassword({ toggleForm }) {
             marginRight="50px"
             color="#000000"
           />
-          <Input placeholder="Email" {...register("email")} />
+          <Input placeholder="Email" {...register("email", { required: "This is required" })} />
         </InputWrapper>
         <Button
           type="submit"
           onClick={() => {
+            setLoading(!loading);
             onSubmit();
           }}
         >
@@ -102,6 +130,7 @@ function ResetPassword({ toggleForm }) {
           <span onClick={toggleForm}>Sign In</span>
         </Switcher>
       </SignUpContent>
+      )}
     </SignUpWrapper>
   );
 }
