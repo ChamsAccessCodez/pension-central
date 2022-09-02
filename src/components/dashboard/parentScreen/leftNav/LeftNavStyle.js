@@ -19,7 +19,7 @@ export const ButtonWrapper = styled.div`
   max-width: 200px;
   height: 70%;
 //   background: grey;
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
 `;
@@ -44,6 +44,10 @@ export const ControlButton = styled.button`
     font-weight: bold;
     color: #206cb1;
   }
+
+  &:active {
+    background: #D0E9FD;
+  }
 `;
 export const ControlButton2 = styled.button`
   background: inherit;
@@ -64,6 +68,11 @@ justify-content: ${({ jc }) => (jc ? "center" : "flex-start")};
     background: #d0e9fd;
     font-weight: bold;
     color: #206cb1;
+  }
+
+  .active{
+    background: yellow;
+    height: 50px;
   }
 `;
 export const DashIcon = styled.img`

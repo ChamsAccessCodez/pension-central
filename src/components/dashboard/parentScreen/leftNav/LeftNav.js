@@ -7,8 +7,9 @@ import uploadScheduleIcon from "../../../../images/uploadScheduleIcon.png"
 import unsubmittedScheduleIcon from "../../../../images/unsubmittedScheduleIcon.png"
 import submittedScheduleIcon from "../../../../images/submittedScheduleIcon.png"
 import reports from "../../../../images/reports.png"
+// import { NavLink } from 'react-router-dom';
 
-const LeftNav = ({toggle}) => {
+const LeftNav = ({toggle, showNormal}) => {
   return (
     <NavWrapper>
         {
@@ -41,10 +42,10 @@ const LeftNav = ({toggle}) => {
                     marginLeft: "20px",
                 }} />
                 <ButtonWrapper>
-                    <ControlButton>
+                    <ControlButton2 onClick={{showNormal}}>
                         <DashIcon src={dashIcon} alt="DashIcon" />
                         <ActionText>Dashboard</ActionText>
-                    </ControlButton>
+                    </ControlButton2>
                     <ControlButton2>
                         <DashIcon src={uploadScheduleIcon} alt="uploadScheduleIcon" />
                         <ActionText>upload schedules</ActionText>

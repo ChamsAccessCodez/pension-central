@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  height: 60px;
-  background: white;
+  height: 70px;
+  background: #F8F8F8;
   display: flex;
   justify-content: space-between;
 `;
@@ -47,9 +47,6 @@ export const PersonContent = styled.div`
   cursor: pointer;
 
   > * {
-    :Me {
-      color: pink;
-    }
     :hover {
       font-family: Poppins;
       font-weight: 500;

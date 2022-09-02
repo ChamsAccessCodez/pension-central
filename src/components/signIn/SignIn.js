@@ -87,10 +87,9 @@ function SignIn({ toggle }) {
         title: "Successful",
         text: "Explore your dashboard!!!",
         // text: data.responseMessage,
-        timer: 30000000,
       }).then(() => {
-        navigate("/");
-        window.location.reload(false);
+        navigate("/dashboard");
+        // window.location.reload(false);
       });
       console.log(data);
     } catch (error) {
@@ -99,6 +98,8 @@ function SignIn({ toggle }) {
         icon: "error",
         title: "Oops...",
         text: "Wrong email or secreteKey",
+        showConfirmButton: false,
+        timer: 3000,
       }).then(() => {
         navigate("/");
         window.location.reload(false);
