@@ -65,7 +65,8 @@ export const PersonImage = styled.img`
 `;
 export const PersonName = styled.div`
   display: flex;
-  justify-content: center;
+//   justify-content: center;
+  justify-content: space around;
   align-items: center;
 `;
 export const Me = styled.div`

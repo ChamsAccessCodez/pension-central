@@ -14,9 +14,7 @@ const Header = () => {
                 <PersonImage src={personAvatar} alt="personAvatar" />
                 <PersonName>
                 <Me>Muomaife</Me>
-                <RiArrowDownSLine style={{
-
-                }} />
+                <RiArrowDownSLine />
                 </PersonName>
             </PersonContent>
         </Two>

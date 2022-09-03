@@ -8,7 +8,7 @@ export const ContentWrapper = styled.div`
   min-height: 100vh;
 `;
 export const NavName = styled.p`
-  margin-top: 40px;
+  margin-top: 30px;
   font-family: Poppins;
   font-weight: 600;
   weight: 600;
@@ -41,9 +41,11 @@ export const NavCardContainer = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 
   :hover {
-    box-shadow: 1px 1px 4px 1px rgba(58, 58, 58, 0.22);
+    transform: scale(0.9);
+    -webkit-transition: transform 1s ease-in-out;
   }
 `;
 export const UploadIcon = styled.img`
