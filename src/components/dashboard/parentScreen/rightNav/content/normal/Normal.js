@@ -1,10 +1,18 @@
 import React from 'react'
-import {} from "./NormalStyle"
+import styled from "styled-components"
 
 const normal = () => {
   return (
-    <div>normal</div>
+    <NormalWrapper>normal</NormalWrapper>
   )
 }
 
-export default normal
+export default normal;
+const NormalWrapper = styled.div`
+background: brown;
+width: 90%;
+height: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+`;

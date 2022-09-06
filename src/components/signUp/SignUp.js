@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,7 +11,6 @@ import { FaHouseUser } from "react-icons/fa";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import ClipLoader from "react-spinners/BeatLoader";
-// import PenLogo from "../../images/pension-central-logo.png";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -22,7 +21,6 @@ import {
   Text,
   Switcher,
   ErrorMessage,
-  // PensionLogo,
 } from "./SignUpStyle";
 
 // loader CSS
@@ -42,7 +40,6 @@ const override = {
 function SignUp({ toggle }) {
   const [loading, setLoading] = useState(false);
   let [color, setColor] = useState("green");
-
 
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
@@ -86,25 +83,29 @@ function SignUp({ toggle }) {
         },
       });
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "success",
         title: "Registration Successful! ",
         text: "Please check your email for your login details.",
         showConfirmButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         // timer: 1500
       }).then(() => {
         navigate("/");
         window.location.reload(false);
       });
-      console.log(data.data);
+      console.log(data);
     } catch (error) {
       console.log(error.response);
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "error",
         title: "Oops...",
         text: error.response.data.responseMessage,
         // text: error.response.data.responseMessage,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
       }).then(() => {
         navigate("/");
         window.location.reload(false);
@@ -116,57 +117,57 @@ function SignUp({ toggle }) {
     <SignUpWrapper>
       {loading ? (
         <ClipLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={10}
-      />
+          color={color}
+          loading={loading}
+          cssOverride={override}
+          size={10}
+        />
       ) : (
         <SignUpContent>
-        {/* <PensionLogo src={PenLogo} alt="happy girl" /> */}
-        <SignUpHeader>sign up</SignUpHeader>
-        <ErrorMessage
-          errors={errors}
-          name="companyName"
-          message="Company name is required."
-        />
-        <InputWrapper>
-          <FaHouseUser marginLeft="50px" marginRight="50px" color="#000000" />
-          <Input
-            placeholder="Company Name"
-            {...register("companyName", {
-              required: "This is a required field",
-            })}
+          {/* <PensionLogo src={PenLogo} alt="happy girl" /> */}
+          <SignUpHeader>sign up</SignUpHeader>
+          <ErrorMessage
+            errors={errors}
+            name="companyName"
+            message="Company name is required."
           />
-        </InputWrapper>
-        {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
-        <InputWrapper>
-          <FaEnvelopeOpen
-            marginLeft="50px"
-            marginRight="50px"
-            color="#000000"
-          />
-          <Input placeholder="Email" {...register("email")} />
-        </InputWrapper>
-        {/* <ErrorMessage>{errors.phone.message}</ErrorMessage> */}
-        <InputWrapper>
-          <FaPhoneAlt marginLeft="50px" marginRight="50px" color="#000000" />
-          <Input placeholder="Phone" {...register("phone")} />
-        </InputWrapper>
-        <Button
-          type="submit"
-          onClick={() => {
-            setLoading(!loading);
-            onSubmit();
-          }}
-        >
-          <Text>sign up</Text>
-        </Button>
-        <Switcher>
-          Already have account?
-          <span onClick={toggle}>Sign In</span>
-        </Switcher>
-      </SignUpContent>
+          <InputWrapper>
+            <FaHouseUser marginLeft="50px" marginRight="50px" color="#000000" />
+            <Input
+              placeholder="Company Name"
+              {...register("companyName", {
+                required: "This is a required field",
+              })}
+            />
+          </InputWrapper>
+          {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
+          <InputWrapper>
+            <FaEnvelopeOpen
+              marginLeft="50px"
+              marginRight="50px"
+              color="#000000"
+            />
+            <Input placeholder="Email" {...register("email")} />
+          </InputWrapper>
+          {/* <ErrorMessage>{errors.phone.message}</ErrorMessage> */}
+          <InputWrapper>
+            <FaPhoneAlt marginLeft="50px" marginRight="50px" color="#000000" />
+            <Input placeholder="Phone" {...register("phone")} />
+          </InputWrapper>
+          <Button
+            type="submit"
+            onClick={() => {
+              setLoading(!loading);
+              onSubmit();
+            }}
+          >
+            <Text>sign up</Text>
+          </Button>
+          <Switcher>
+            Already have account?
+            <span onClick={toggle}>Sign In</span>
+          </Switcher>
+        </SignUpContent>
       )}
     </SignUpWrapper>
   );

@@ -1,25 +1,82 @@
-import React from 'react'
-import { RiArrowDownSLine } from 'react-icons/ri';
-import { HeaderWrapper, One, Two, Settings, PersonContent, PersonImage, PersonName, Me} from "./HeaderStyle"
-import settingsIcon from "../../../../../images/settingIcon.png"
-import personAvatar from "../../../../../images/userAvatar.png"
+import React, { useState } from "react";
+import {
+  HeaderWrapper,
+  One,
+  Two,
+  Settings,
+  Drop,
+  SettingsList,
+  PersonContent,
+  PersonImage,
+} from "./HeaderStyle";
+import settingsIcon from "../../../../../images/settingIcon.png";
+import { useSelector, useDispatch } from "react-redux";
+import personAvatar from "../../../../../images/userAvatar.png";
+import decoded from "jwt-decode";
+import { signOut } from "../../../../Globals/Reducers";
 
 const Header = () => {
+  const [selected, setSelected] = useState("");
+  const [showSettings, setShowSettings] = useState("false");
+
+  const settingOptions = ["Settings", "Logout"];
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.persistedReducer.current);
+
+  let decoder;
+  if (user) {
+    const decode = user.token;
+    decoder = decoded(decode);
+  }
+
+  console.log(decoder);
+
   return (
     <HeaderWrapper>
-        <One>Hi, Welcome back <span> Muomaife</span></One>
-        <Two>
-            <Settings src={settingsIcon} alt="settingsIcon" />
-            <PersonContent>
-                <PersonImage src={personAvatar} alt="personAvatar" />
-                <PersonName>
-                <Me>Muomaife</Me>
-                <RiArrowDownSLine />
-                </PersonName>
-            </PersonContent>
-        </Two>
+      <One>
+        Welcome <span> {decoder && decoder.nameid} HR</span>
+      </One>
+      <Two>
+        <Settings
+          src={settingsIcon}
+          alt="settingsIcon"
+          onClick={(e) => {
+            setShowSettings(!showSettings);
+          }}
+          // onMouseEnter={(e)=>{
+          //   setShowSettings(!showSettings)
+          // }}
+        />
+        {!showSettings && (
+          <Drop
+            // onMouseLeave={() => {
+            //   setShowSettings(false);
+            // }}
+          >
+            {settingOptions.map((option) => (
+              <SettingsList
+                onClick={() => {
+                  setSelected(option);
+                  setShowSettings(!showSettings);
+                  if(option.startsWith("L")){
+                    dispatch(signOut(user));
+                  }
+                }}
+              >
+                {option}
+              </SettingsList>
+            ))}
+          </Drop>
+        )}
+        <PersonContent>
+          <PersonImage
+            src={personAvatar}
+            alt="personAvatar"
+          />
+        </PersonContent>
+      </Two>
     </HeaderWrapper>
-  )
-}
+  );
+};
 
 export default Header;

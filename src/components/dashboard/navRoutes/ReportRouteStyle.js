@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled from "styled-components"
+
+export const UploadWrapper = styled.div`
+width: 100vw;
+min-height: 100vh;
+background-color: brown;
+`;
+// export const UploadWrapper = styled.div``;
+// export const UploadWrapper = styled.div``;
 
 export const Wrapper = styled.div`
   background: #f8f8f8;
@@ -49,13 +57,3 @@ export const RightNavWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;
-// export const Wrapper = styled.div``;

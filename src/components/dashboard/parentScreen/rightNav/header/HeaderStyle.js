@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
   width: 100%;
   height: 70px;
-  background: #F8F8F8;
+  background: #f8f8f8;
   display: flex;
   justify-content: space-between;
 `;
@@ -34,16 +34,43 @@ align-items: center;
 margin-right: 60px;
 `;
 export const Settings = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  margin-right: 20px;
   cursor: pointer;
+`;
+export const Drop = styled.div`
+  background: #ffffff;
+  position: absolute;
+  width: 120px;
+  height: auto;
+  top: 60px;
+  right: 60px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+`;
+export const SettingsList = styled.div`
+  //   background: #f8f8f8;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: Poppins;
+  font-size: 11px;
+
+  :hover {
+    background: #d0e9fd;
+    font-weight: 600;
+    color: #206cb1;
+  }
 `;
 export const PersonContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-//   background: green;
+  //   background: green;
   cursor: pointer;
 
   > * {
@@ -62,15 +89,6 @@ export const PersonImage = styled.img`
   height: 30px;
   width: 30px;
   margin-right: 5px;
-`;
-export const PersonName = styled.div`
-  display: flex;
-//   justify-content: center;
-  justify-content: space around;
-  align-items: center;
-`;
-export const Me = styled.div`
-  text-transform: capitalize;
 `;
 // export const HeaderWrapper = styled.div`
 // `;

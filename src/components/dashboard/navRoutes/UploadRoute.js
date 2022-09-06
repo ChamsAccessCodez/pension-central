@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, {useState} from 'react'
 import iconBack from "../../../images/IconBack.png";
 import iconFront from "../../../images/IconFront.png";
 import LeftNav from "../parentScreen/leftNav/LeftNav";
 // import RightNav from "../parentScreen/rightNav/RightNav";
 import Header from "../parentScreen/rightNav/header/Header";
-import Card from "./rightNav/content/Card";
-import Normal from "./rightNav/content/normal/Normal"
+import Card from "../parentScreen/rightNav/content/Card";
+import UploadShedule from "../parentScreen/rightNav/content/uploadSchedule/UploadSchedule"
+
 import {
-  Wrapper,
-  ParentNav,
-  ParentContent,
-  IconBack,
-  RightNavWrapper,
-} from "./ParentScreenStyle";
+    UploadWrapper,
+    // shsjsjk
+    Wrapper,
+    ParentNav,
+    ParentContent,
+    IconBack,
+    RightNavWrapper,} from './UploadRouteStyle'
 
-const ParentScreen = () => {
-  const [toggle, setToggle] = useState(false);
-  const toggleMe = () => {
-    setToggle(!toggle);
-  };
-
+const UploadRoute = () => {
+    const [toggle, setToggle] = useState(false);
+    const toggleMe = () => {
+      setToggle(!toggle);
+    };
   return (
-    <Wrapper>
+    <UploadWrapper>
+        <Wrapper>
       {toggle ? (
         <ParentNav>
           <LeftNav toggle={toggle} />
@@ -48,12 +50,13 @@ const ParentScreen = () => {
       <ParentContent>
         <RightNavWrapper>
           <Header />
-          <Card />
-          <Normal />
+          <Card dashWord />
+          <UploadShedule />
         </RightNavWrapper>
       </ParentContent>
     </Wrapper>
-  );
-};
+    </UploadWrapper>
+  )
+}
 
-export default ParentScreen;
+export default UploadRoute;

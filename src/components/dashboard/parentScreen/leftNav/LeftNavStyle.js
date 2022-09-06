@@ -54,14 +54,12 @@ export const ControlButton2 = styled.button`
   height: 50px;
   width: 100%;
   border: none;
-  margin-bottom: 10px;
   cursor: pointer;
   display: flex;
 //   justify-content: flex-start;
 justify-content: ${({ jc }) => (jc ? "center" : "flex-start")};
   align-items: center;
   font-weight: normal;
-  //   color: #000000;
   transition: background 1s;
 
   :hover {

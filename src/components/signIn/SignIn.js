@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FaEnvelopeOpen, FaFileExcel, FaLock } from "react-icons/fa";
-import ResetPassword from "../resetPassword/ResetPassword";
+import { FaEnvelopeOpen, FaLock } from "react-icons/fa";
+import ResetPassword from "../forgotPassword/ForgotPassword";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +9,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 import ClipLoader from "react-spinners/BeatLoader";
+import { useDispatch } from "react-redux";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -20,6 +21,7 @@ import {
   Switcher,
   Switcher2,
 } from "./SignInStyle";
+import { user } from "../Globals/Reducers";
 
 // loader CSS
 const override = {
@@ -36,6 +38,7 @@ const override = {
 };
 
 function SignIn({ toggle }) {
+  const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
   const [loading, setLoading] = useState(false);
   let [color, setColor] = useState("green");
@@ -48,7 +51,7 @@ function SignIn({ toggle }) {
   // userSignIn with react-hook-form
   const userSchema = yup.object().shape({
     email: yup.string().required("Email address cannot be empty"),
-    secret: yup.string().required("Phone cannot be empty"),
+    secret: yup.string().required("Secret cannot be empty"),
   });
 
   const {
@@ -68,7 +71,7 @@ function SignIn({ toggle }) {
     try {
       const url = "https://sandbox.findfood.ng/api/SubmitSchedules/auth";
 
-      const { data } = await axios({
+      const { data} = await axios({
         headers: {
           "Content-Type": "application/json",
           Accept: "*",
@@ -82,24 +85,29 @@ function SignIn({ toggle }) {
         },
       });
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "success",
-        title: "Successful",
+        title: data.responseMessage,
+        // title: "Successful",
         text: "Explore your dashboard!!!",
-        // text: data.responseMessage,
+        allowOutsideClick: false,
+        allowEscapeKey: false
       }).then(() => {
+        dispatch(user(data));
+        console.log(data.responseMessage);
         navigate("/dashboard");
-        // window.location.reload(false);
       });
       console.log(data);
     } catch (error) {
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "error",
-        title: "Oops...",
+        // title: "Oops...",
         text: "Wrong email or secreteKey",
         showConfirmButton: false,
-        timer: 3000,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        timer: 2000,
       }).then(() => {
         navigate("/");
         window.location.reload(false);
@@ -163,7 +171,7 @@ function SignIn({ toggle }) {
                 </Switcher>
                 <Switcher2>
                   Forgot password?
-                  <span onClick={toggleForm}>Reset Password</span>
+                  <span onClick={toggleForm}>Forgot Password</span>
                 </Switcher2>
               </SignUpContent>
             </SignUpWrapper>
