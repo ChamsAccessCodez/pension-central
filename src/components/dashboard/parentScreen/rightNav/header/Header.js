@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {NavLink} from 'react-router-dom'
 import {
   HeaderWrapper,
   One,
@@ -49,30 +50,37 @@ const Header = () => {
         />
         {!showSettings && (
           <Drop
-            // onMouseLeave={() => {
-            //   setShowSettings(false);
-            // }}
+          // onMouseLeave={() => {
+          //   setShowSettings(false);
+          // }}
           >
             {settingOptions.map((option) => (
-              <SettingsList
-                onClick={() => {
-                  setSelected(option);
-                  setShowSettings(!showSettings);
-                  if(option.startsWith("L")){
-                    dispatch(signOut(user));
-                  }
+              <NavLink
+                to="/password-reset"
+                style={({ isActive }) => {
+                  return {
+                    backgroundColor: isActive ? "#d0e9fd" : "null",
+                    textDecoration: "none",
+                  };
                 }}
               >
-                {option}
-              </SettingsList>
+                <SettingsList
+                  onClick={() => {
+                    setSelected(option);
+                    setShowSettings(!showSettings);
+                    if (option.startsWith("L")) {
+                      dispatch(signOut(user));
+                    }
+                  }}
+                >
+                  {option}
+                </SettingsList>
+              </NavLink>
             ))}
           </Drop>
         )}
         <PersonContent>
-          <PersonImage
-            src={personAvatar}
-            alt="personAvatar"
-          />
+          <PersonImage src={personAvatar} alt="personAvatar" />
         </PersonContent>
       </Two>
     </HeaderWrapper>
