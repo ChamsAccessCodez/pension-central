@@ -5,7 +5,7 @@ import LeftNav from "../parentScreen/leftNav/LeftNav";
 // import RightNav from "../parentScreen/rightNav/RightNav";
 import Header from "../parentScreen/rightNav/header/Header";
 import Card from "../parentScreen/rightNav/content/Card";
-import Reports from "../parentScreen/rightNav/content/reports/Reports"
+import ResetPassword from "../../resetPassword/ResetPassword"
 
 import {
     UploadWrapper,
@@ -16,7 +16,7 @@ import {
     IconBack,
     RightNavWrapper,} from './UploadRouteStyle'
 
-const ReportRoute = () => {
+const PasswordResetRoute = () => {
     const [toggle, setToggle] = useState(false);
     const toggleMe = () => {
       setToggle(!toggle);
@@ -50,8 +50,8 @@ const ReportRoute = () => {
       <ParentContent>
         <RightNavWrapper>
           <Header />
-          <Card reportWord />
-          <Reports />
+          <Card passWord />
+          <ResetPassword />
         </RightNavWrapper>
       </ParentContent>
     </Wrapper>
@@ -59,4 +59,4 @@ const ReportRoute = () => {
   )
 }
 
-export default ReportRoute;
+export default PasswordResetRoute;

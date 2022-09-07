@@ -94,10 +94,10 @@ function SignIn({ toggle }) {
         allowEscapeKey: false
       }).then(() => {
         dispatch(user(data));
-        console.log(data.responseMessage);
+        // console.log(data.responseMessage);
         navigate("/dashboard");
       });
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       Swal.fire({
         position: "center",

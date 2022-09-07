@@ -47,6 +47,7 @@ export const Drop = styled.div`
   top: 60px;
   right: 60px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  z-index: 1000;
 `;
 export const SettingsList = styled.div`
   //   background: #f8f8f8;

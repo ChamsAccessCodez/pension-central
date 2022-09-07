@@ -15,7 +15,7 @@ import submittedScheduleIcon2 from "../../../../../images/submittedScheduleIcon2
 import reportIcon from "../../../../../images/reportIcon.png";
 
 
-const Card = ({ dashWord, submitWord, unsubmitWord, reportWord }) => {
+const Card = ({ dashWord, submitWord, unsubmitWord, reportWord, passWord }) => {
 
   return (
     <ContentWrapper>
@@ -39,9 +39,15 @@ const Card = ({ dashWord, submitWord, unsubmitWord, reportWord }) => {
              Schedule<span>Reports</span>
            </NavName>
              ) : (
-              <NavName>
-              Dashboard
-            </NavName>
+              passWord ? (
+                <NavName>
+                 Settings<span>Change Password</span>
+               </NavName>
+                 ) : (
+                  <NavName>
+                  Dashboard
+                </NavName>
+                 )
              )
         )
       ))}

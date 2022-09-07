@@ -46,11 +46,7 @@ export const NavCardContainer = styled(NavLink)`
 
   &.active{
     transform: scale(0.9);
-
-  :hover {
-    transform: scale(0.9);
     -webkit-transition: transform 1s ease-in-out;
-  }
 `;
 export const UploadIcon = styled.img`
   height: 49px;

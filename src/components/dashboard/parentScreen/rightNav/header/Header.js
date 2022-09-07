@@ -19,7 +19,7 @@ const Header = () => {
   const [selected, setSelected] = useState("");
   const [showSettings, setShowSettings] = useState("false");
 
-  const settingOptions = ["Settings", "Logout"];
+  const settingOptions = ["Change Password", "Logout"];
   const dispatch = useDispatch();
   const user = useSelector((state) => state.persistedReducer.current);
 

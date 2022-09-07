@@ -137,6 +137,20 @@ const LeftNav = ({ toggle }) => {
                 <ActionText>Reports</ActionText>
               </ControlButton2>
             </NavLink>
+            <NavLink
+              to="/password-reset"
+              style={({ isActive }) => {
+                return {
+                  backgroundColor: isActive ? "#5B9B45" : "null",
+                  textDecoration: "none",
+                };
+              }}
+            >
+              <ControlButton2>
+                <DashIcon src={reports} alt="change password" />
+                <ActionText>Change Password</ActionText>
+              </ControlButton2>
+            </NavLink>
           </ButtonWrapper>
         </>
       )}
