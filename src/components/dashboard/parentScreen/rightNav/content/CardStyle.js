@@ -46,6 +46,7 @@ export const NavCardContainer = styled(NavLink)`
 
   &.active{
     transform: scale(0.9);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     -webkit-transition: transform 1s ease-in-out;
 `;
 export const UploadIcon = styled.img`

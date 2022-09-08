@@ -6,6 +6,8 @@ import LeftNav from "../parentScreen/leftNav/LeftNav";
 import Header from "../parentScreen/rightNav/header/Header";
 import Card from "./rightNav/content/Card";
 import Normal from "./rightNav/content/normal/Normal"
+import ResetPassword from "../../../components/resetPassword/ResetPassword"
+import { useSelector } from "react-redux";
 import {
   Wrapper,
   ParentNav,
@@ -14,14 +16,20 @@ import {
   RightNavWrapper,
 } from "./ParentScreenStyle";
 
+
 const ParentScreen = () => {
+  const user = useSelector((state) => state.persistedReducer.current);
   const [toggle, setToggle] = useState(false);
   const toggleMe = () => {
     setToggle(!toggle);
   };
 
   return (
-    <Wrapper>
+    <>
+    {user && user.changePassword ? (
+      <ResetPassword />
+    ) : (
+      <Wrapper>
       {toggle ? (
         <ParentNav>
           <LeftNav toggle={toggle} />
@@ -53,6 +61,9 @@ const ParentScreen = () => {
         </RightNavWrapper>
       </ParentContent>
     </Wrapper>
+    )}
+    </>
+    
   );
 };
 

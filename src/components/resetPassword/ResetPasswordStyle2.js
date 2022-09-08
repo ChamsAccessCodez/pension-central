@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 export const BoardWrapper = styled.div`
   background: #f8f8f8;
-  width: 100vw;
-  // width: 100%;
-  height: 100vh;
-  // height: 80vh;
+  width: 100%;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +11,7 @@ export const BoardWrapper = styled.div`
 export const BoardContent = styled.div`
   background: rgba(236, 236, 236, 0.5);
   width: 60%;
-  // width: 60%;
-  height: 70%;
-  // height: 90%;
+  height: 90%;
   display: flex;
 
   @media (max-width: 768px) {

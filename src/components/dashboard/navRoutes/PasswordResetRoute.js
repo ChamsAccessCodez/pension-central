@@ -5,7 +5,7 @@ import LeftNav from "../parentScreen/leftNav/LeftNav";
 // import RightNav from "../parentScreen/rightNav/RightNav";
 import Header from "../parentScreen/rightNav/header/Header";
 import Card from "../parentScreen/rightNav/content/Card";
-import ResetPassword from "../../resetPassword/ResetPassword"
+import ResetPassword2 from "../../resetPassword/ResetPassword2"
 
 import {
     UploadWrapper,
@@ -51,7 +51,7 @@ const PasswordResetRoute = () => {
         <RightNavWrapper>
           <Header />
           <Card passWord />
-          <ResetPassword />
+          <ResetPassword2 />
         </RightNavWrapper>
       </ParentContent>
     </Wrapper>

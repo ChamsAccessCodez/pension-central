@@ -92,7 +92,7 @@ function SignUp({ toggle }) {
         allowEscapeKey: false,
         // timer: 1500
       }).then(() => {
-        navigate("/");
+        // navigate("/");
         window.location.reload(false);
       });
       console.log(data);
