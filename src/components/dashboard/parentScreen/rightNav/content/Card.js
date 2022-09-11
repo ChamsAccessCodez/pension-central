@@ -81,6 +81,9 @@ const Card = ({ dashWord, submitWord, unsubmitWord, reportWord, passWord }) => {
         </NavCardContainer>
         <NavCardContainer 
         to="/reports"
+        style={{
+          background: "#FFE8DA"
+        }}
         >
           <UploadIcon src={reportIcon} alt=" Icon Sample" />
           <Figure>70+</Figure>

@@ -31,7 +31,7 @@ import {
   PensionLogo,
   Square,
   PensionLogo2,
-} from "./ResetPasswordStyle.js";
+} from "./ResetPasswordStyle2.js";
 
 // loader CSS
 const override = {
@@ -124,14 +124,7 @@ function ResetPassword() {
 
   return (
     <BoardWrapper>
-      <BoardContent>
-        <BrandAdd>
-          <PensionLogo src={PenLogo} alt="happy girl" />
-          <Square></Square>
-          <PensionImage src={JumpGirl} alt="happy girl" />
-        </BrandAdd>
         <BrandForm>
-          <PensionLogo2 src={PenLogo2} alt="happy girl" />
           <SignUpWrapper>
             {loading ? (
               <ClipLoader
@@ -203,7 +196,6 @@ function ResetPassword() {
             )}
           </SignUpWrapper>
         </BrandForm>
-      </BoardContent>
     </BoardWrapper>
   );
 }
