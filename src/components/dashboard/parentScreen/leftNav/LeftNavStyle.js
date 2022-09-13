@@ -28,11 +28,9 @@ export const ControlButton = styled.button`
   height: 50px;
   width: 100%;
   border: none;
-  margin-bottom: 30px;
   cursor: pointer;
   display: flex;
   justify-content: flex-start;
-//   justify-content: space-around;
   justify-content: ${({ jc }) => (jc ? "center" : "flex-start")};
   align-items: center;
   font-weight: normal;
@@ -78,6 +76,7 @@ export const DashIcon = styled.img`
   width: 20px;
   margin-right: 10px;
   margin-left: 5px;
+  color: #071b64;
 `;
 export const ActionText = styled.div`
   text-transform: capitalize;

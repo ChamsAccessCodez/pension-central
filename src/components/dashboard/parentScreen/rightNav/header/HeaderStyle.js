@@ -72,7 +72,6 @@ export const PersonContent = styled.div`
   justify-content: center;
   align-items: center;
   //   background: green;
-  cursor: pointer;
 
   > * {
     :hover {
