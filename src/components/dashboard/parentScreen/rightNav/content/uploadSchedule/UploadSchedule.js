@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import decoded from "jwt-decode";
+import FileDownload from "js-file-download";
 
 const UploadSchedule = () => {
   const user = useSelector((state) => state.persistedReducer.current);
@@ -16,6 +17,30 @@ const UploadSchedule = () => {
   let [result, setResult] = useState();
   const navigate = useNavigate();
   let formData = new FormData();
+
+  // handle download
+  const handleDownload = (e) => {
+    e.preventDefault();
+    axios({
+      url: "http://localhost:8000/",
+      method: "GET",
+      responseType: "blob",
+      Accept: "*",
+      mode: "cors",
+    }).then((res) => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: res.data.responseMessage,
+        text: "The schedule template was downloaded successfully",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: true,
+      });
+      console.log(res);
+      FileDownload(res.data, "HR-schedule-template.xlsx");
+    });
+  };
 
   // handle any change on input field
   const handleChange = (e) => {
@@ -199,7 +224,11 @@ const UploadSchedule = () => {
             <UploadSchedu type="submit">
               <Text>Upload Schedule</Text>
             </UploadSchedu>
-            <DownloadSchedule>
+            <DownloadSchedule
+              onClick={(e) => {
+                handleDownload(e);
+              }}
+            >
               <Text style={{ color: "#82c7fe" }}>Download Schedule</Text>
             </DownloadSchedule>
           </ActionRow>
