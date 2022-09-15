@@ -22,7 +22,8 @@ const UploadSchedule = () => {
   const handleDownload = (e) => {
     e.preventDefault();
     axios({
-      url: "http://localhost:8000/",
+      url: "https://download.findfood.ng/",
+      // url: "http://localhost:8000/",
       method: "GET",
       responseType: "blob",
       Accept: "*",
