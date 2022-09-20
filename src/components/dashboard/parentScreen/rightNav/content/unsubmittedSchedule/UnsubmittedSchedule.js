@@ -94,10 +94,9 @@ const UnsubmittedSchedule = () => {
   };
   // end of material ui construct.
 
-
   const scheduleSchema = yup.object().shape({
     email: yup.string().required("Email address cannot be empty"),
-    employerCode: yup.string().required("Employee code cannot be empty"),
+    // employerCode: yup.string().required("Employee code cannot be empty"),
   });
   const {
     register,
@@ -110,7 +109,8 @@ const UnsubmittedSchedule = () => {
 
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
-    const { email, employerCode } = value;
+    const { email } = value;
+    // const { email, employerCode } = value;
     try {
       const url = "https://sandbox.findfood.ng/api/SubmittedSchedules/all";
 
@@ -125,7 +125,7 @@ const UnsubmittedSchedule = () => {
         method: "post",
         data: {
           clientId: email,
-          employerCode: employerCode,
+          // employerCode: employerCode,
         },
       });
       fakeData = data.data;
@@ -169,11 +169,11 @@ const UnsubmittedSchedule = () => {
     <UnsubmittedWrapper>
       <FormHolder>
         <FormHolder1>
-          <ErrorMessage
+          {/* <ErrorMessage
             errors={errors}
             name="email"
             message="email name is required."
-          />
+          /> */}
           <ClientId
             type="email"
             placeholder="Client Id"
@@ -182,7 +182,7 @@ const UnsubmittedSchedule = () => {
             })}
           />
         </FormHolder1>
-        <FormHolder1>
+        {/* <FormHolder1>
           <ErrorMessage
             errors={errors}
             name="employerCode"
@@ -195,7 +195,7 @@ const UnsubmittedSchedule = () => {
               required: "This is a required field",
             })}
           />
-        </FormHolder1>
+        </FormHolder1> */}
         <Submit
           type="submit"
           onClick={() => {
@@ -206,15 +206,6 @@ const UnsubmittedSchedule = () => {
           Submit
         </Submit>
       </FormHolder>
-      {/* <p
-        style={{
-          color: "#000000",
-          fontSize: "18px",
-          fontWeight: "500",
-        }}
-      >
-        Unsubmitted Schedules
-      </p> */}
       <UnsubmittedSchedulesResult>
         {result.map((res, index) => (
           <div key={index}>
@@ -304,10 +295,11 @@ const Submit = styled.button`
   background: green;
   // background: #82c7fe;
   border-radius: 5px;
-  height: 40px;
+  height: 45px;
   font-family: Poppins;
   font-weight: 500;
   color: white;
+  margin-left: 5px;
 
   :hover {
     border: 1px solid #ffffff;
@@ -317,19 +309,23 @@ const FormHolder = styled.div`
   width: inherit;
   // background: red;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  // justify-content: space-around;
   align-items: center;
   margin-top: 30px;
   margin-bottom: 30px;
+  height: 50px;
 `;
 const FormHolder1 = styled.div`
-  width: inherit;
-  width: 50%;
+  // width: inherit;
+  // width: 50%;
   // background: black;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  margin-right: 5px;
+  height: inherit;
 `;
 const UnsubmittedSchedulesResult = styled.div`
   width: 95%;

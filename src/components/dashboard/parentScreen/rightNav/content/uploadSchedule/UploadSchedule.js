@@ -191,6 +191,7 @@ const UploadSchedule = () => {
           <InputRow>
             <RealInput
               type="file"
+              accept=".xlsx"
               placeholder="Choose file"
               onChange={handleChange}
               style={{
