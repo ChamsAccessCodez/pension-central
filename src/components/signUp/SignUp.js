@@ -39,7 +39,7 @@ const override = {
 
 function SignUp({ toggle }) {
   const [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("green");
+  // let [color, setColor] = useState("green");
 
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
@@ -107,6 +107,7 @@ function SignUp({ toggle }) {
         allowOutsideClick: false,
         allowEscapeKey: false,
       }).then(() => {
+        reset();
         navigate("/");
         window.location.reload(false);
       });
@@ -117,7 +118,7 @@ function SignUp({ toggle }) {
     <SignUpWrapper>
       {loading ? (
         <ClipLoader
-          color={color}
+          // color={color}
           loading={loading}
           cssOverride={override}
           size={10}

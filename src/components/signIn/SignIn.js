@@ -41,7 +41,7 @@ function SignIn({ toggle }) {
   const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
   const [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("green");
+  // let [color, setColor] = useState("green");
 
   // toggle state
   const toggleForm = () => {
@@ -109,6 +109,7 @@ function SignIn({ toggle }) {
         allowEscapeKey: false,
         timer: 2000,
       }).then(() => {
+        reset();
         navigate("/");
         window.location.reload(false);
       });
@@ -120,7 +121,7 @@ function SignIn({ toggle }) {
     <>
       {loading ? (
         <ClipLoader
-          color={color}
+          // color={color}
           loading={loading}
           cssOverride={override}
           size={10}

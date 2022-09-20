@@ -9,7 +9,7 @@ const SubmittedSchedule = () => {
 
 export default SubmittedSchedule
 const SubmittedWrapper = styled.div`
-background: brown;
+background: #FFF8CE;
 width: 90%;
 height: auto;
 display: flex;

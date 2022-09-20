@@ -211,7 +211,7 @@ const LeftNav = ({ toggle }) => {
               }}
             >
               <ControlButton2>
-                <DashIcon src={reports} alt="change password" />
+                <DashIcon src={settingsIcon} alt="change password" />
                 <ActionText>Change Password</ActionText>
               </ControlButton2>
             </NavLink>

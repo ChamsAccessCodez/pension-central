@@ -9,7 +9,7 @@ const Reports = () => {
 
 export default Reports
 const ReportWrapper = styled.div`
-background: brown;
+background: #FFE8DA;
 width: 90%;
 height: auto;
 display: flex;

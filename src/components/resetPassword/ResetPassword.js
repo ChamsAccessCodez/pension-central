@@ -13,7 +13,6 @@ import "sweetalert2/dist/sweetalert2.css";
 import { FaEnvelopeOpen, FaLock } from "react-icons/fa";
 import ClipLoader from "react-spinners/BeatLoader";
 import { useSelector } from "react-redux";
-import decoded from "jwt-decode";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -115,6 +114,7 @@ function ResetPassword() {
         allowOutsideClick: false,
         allowEscapeKey: false,
       }).then(() => {
+        reset();
         navigate("/");
         window.location.reload(false);
       });

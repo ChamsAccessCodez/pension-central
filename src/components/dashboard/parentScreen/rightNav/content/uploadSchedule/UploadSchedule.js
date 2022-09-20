@@ -6,17 +6,16 @@ import * as XLSX from "xlsx";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import decoded from "jwt-decode";
 import FileDownload from "js-file-download";
+import downloadIcon from "../../../../../../images/downloadIcon.png"
+import uploadIcon from "../../../../../../images/uploadIcon1.png"
 
 const UploadSchedule = () => {
   const user = useSelector((state) => state.persistedReducer.current);
 
   const [file, setFile] = useState();
   let [result, setResult] = useState();
-  const navigate = useNavigate();
-  let formData = new FormData();
 
   // handle download
   const handleDownload = (e) => {
@@ -116,7 +115,7 @@ const UploadSchedule = () => {
     }
     const payload = {
       clientId: decoder && decoder.nameid,
-      clientId: "test@test.com",
+      // clientId: "test@test.com",
       employer: {
         employerCode: "c200",
         employerName: "test",
@@ -222,16 +221,18 @@ const UploadSchedule = () => {
             <Browse>browse</Browse>
           </InputRow>
           <ActionRow>
-            <UploadSchedu type="submit">
-              <Text>Upload Schedule</Text>
-            </UploadSchedu>
-            <DownloadSchedule
+          <DownloadSchedule
               onClick={(e) => {
                 handleDownload(e);
               }}
             >
+              <DownloadIcon src={downloadIcon} alt="Download" />
               <Text style={{ color: "#82c7fe" }}>Download Schedule</Text>
             </DownloadSchedule>
+            <UploadSchedu type="submit">
+              <UploadIcon src={uploadIcon} alt="Upload" />
+              <Text>Upload Schedule</Text>
+            </UploadSchedu>
           </ActionRow>
         </form>
       </UploadForm>
@@ -380,7 +381,7 @@ const DownloadSchedule = styled.button`
   background: #ffffff;
   border: 1px solid #82c7fe;
   border-radius: 5px;
-  width: 150px;
+  width: 180px;
 
   :hover {
     border: none;
@@ -395,7 +396,7 @@ const UploadSchedu = styled.button`
   background: #82c7fe;
   border: 1px solid #82c7fe;
   border-radius: 5px;
-  width: 150px;
+  width: 180px;
 
   :hover {
     border: 1px solid #ffffff;
@@ -408,5 +409,15 @@ const Text = styled.p`
   font-size: 12px;
   color: #ffffff;
 `;
-// const ActionRow = styled.div`
-// `;
+const DownloadIcon = styled.img`
+hight: 20px;
+width: 20px;
+color: #82c7fe;
+margin-right: 5px;
+`;
+const UploadIcon = styled.img`
+hight: 20px;
+width: 20px;
+font-color: #ffffff;
+margin-right: 5px;
+`;

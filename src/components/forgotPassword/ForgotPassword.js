@@ -35,7 +35,7 @@ const override = {
 
 function ResetPassword({ toggleForm }) {
   const [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("green");
+  // let [color, setColor] = useState("green");
 
   // resetPassword with react-hook-form
   const resetSchema = yup.object().shape({
@@ -95,6 +95,7 @@ function ResetPassword({ toggleForm }) {
         allowOutsideClick: false,
         allowEscapeKey: false,
       }).then(() => {
+        reset();
         navigate("/");
         window.location.reload(false);
       });
@@ -104,7 +105,7 @@ function ResetPassword({ toggleForm }) {
     <SignUpWrapper>
       {loading ? (
                 <ClipLoader
-                color={color}
+                // color={color}
                 loading={loading}
                 cssOverride={override}
                 size={10}

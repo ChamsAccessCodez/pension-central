@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import JumpGirl from "../../images/happy-person.png";
-import PenLogo from "../../images/pension-central-logo.png";
-import PenLogo2 from "../../images/pension-central-logo.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,7 +10,7 @@ import "sweetalert2/dist/sweetalert2.css";
 import { FaEnvelopeOpen, FaLock } from "react-icons/fa";
 import ClipLoader from "react-spinners/BeatLoader";
 import { useSelector } from "react-redux";
-import decoded from "jwt-decode";
+// import decoded from "jwt-decode";
 import {
   SignUpWrapper,
   SignUpHeader,
@@ -24,13 +21,7 @@ import {
   Text,
   ErrorMessage,
   BoardWrapper,
-  BoardContent,
-  BrandAdd,
   BrandForm,
-  PensionImage,
-  PensionLogo,
-  Square,
-  PensionLogo2,
 } from "./ResetPasswordStyle2.js";
 
 // loader CSS
@@ -47,7 +38,7 @@ function ResetPassword() {
   const user = useSelector((state) => state.persistedReducer.current);
 
   const [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("green");
+  // let [color, setColor] = useState("green");
 
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
@@ -115,6 +106,7 @@ function ResetPassword() {
         allowOutsideClick: false,
         allowEscapeKey: false,
       }).then(() => {
+        reset();
         navigate("/");
         window.location.reload(false);
       });
@@ -128,7 +120,7 @@ function ResetPassword() {
           <SignUpWrapper>
             {loading ? (
               <ClipLoader
-                color={color}
+                // color={color}
                 loading={loading}
                 cssOverride={override}
                 size={10}
