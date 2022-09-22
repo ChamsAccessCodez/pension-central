@@ -25,10 +25,6 @@ import {
 
 // loader CSS
 const override = {
-  // display: "block",
-  // margin: "0 auto",
-  // borderColor: "red",
-  // backgroundColor: "brown",
   width: "inherit",
   height: "100%",
   display: "flex",
@@ -118,7 +114,7 @@ function SignUp({ toggle }) {
     <SignUpWrapper>
       {loading ? (
         <ClipLoader
-          // color={color}
+          color={"green"}
           loading={loading}
           cssOverride={override}
           size={10}

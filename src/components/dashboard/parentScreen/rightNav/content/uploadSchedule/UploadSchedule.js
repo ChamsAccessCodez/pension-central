@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
 import decoded from "jwt-decode";
 import FileDownload from "js-file-download";
-import downloadIcon from "../../../../../../images/downloadIcon.png"
-import uploadIcon from "../../../../../../images/uploadIcon1.png"
+import downloadIcon from "../../../../../../images/downloadIcon.png";
+import uploadIcon from "../../../../../../images/uploadIcon1.png";
 
 const UploadSchedule = () => {
   const user = useSelector((state) => state.persistedReducer.current);
@@ -22,7 +22,6 @@ const UploadSchedule = () => {
     e.preventDefault();
     axios({
       url: "https://download.findfood.ng/",
-      // url: "http://localhost:8000/",
       method: "GET",
       responseType: "blob",
       Accept: "*",
@@ -44,7 +43,8 @@ const UploadSchedule = () => {
 
   // handle any change on input field
   const handleChange = (e) => {
-    // Solution one
+    e.preventDefault();
+
     setFile(e.target.files[0]);
     console.log(e.target.files);
 
@@ -52,7 +52,7 @@ const UploadSchedule = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const data = e.target.result;
-        const workbook = XLSX.read(data, { type: "binary" });
+        const workbook = XLSX.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(worksheet);
@@ -98,6 +98,8 @@ const UploadSchedule = () => {
         setResult(schedules);
       };
       reader.readAsArrayBuffer(e.target.files[0]);
+    } else {
+      console.log("no file");
     }
   };
 
@@ -114,8 +116,8 @@ const UploadSchedule = () => {
       decoder = decoded(decode);
     }
     const payload = {
-      clientId: decoder && decoder.nameid,
-      // clientId: "test@test.com",
+      clientId: decoder && decoder.unique_name,
+      // clientId: "ubani.udochukwu@gmail.com",
       employer: {
         employerCode: "c200",
         employerName: "test",
@@ -152,7 +154,7 @@ const UploadSchedule = () => {
       .catch((err) => {
         Swal.fire({
           position: "center",
-          icon: "success",
+          icon: "error",
           title: err.code,
           text: "There was an error uploading your schedule.",
           allowOutsideClick: false,
@@ -222,7 +224,7 @@ const UploadSchedule = () => {
             <Browse>browse</Browse>
           </InputRow>
           <ActionRow>
-          <DownloadSchedule
+            <DownloadSchedule
               onClick={(e) => {
                 handleDownload(e);
               }}
@@ -411,14 +413,14 @@ const Text = styled.p`
   color: #ffffff;
 `;
 const DownloadIcon = styled.img`
-hight: 20px;
-width: 20px;
-color: #82c7fe;
-margin-right: 5px;
+  hight: 20px;
+  width: 20px;
+  color: #82c7fe;
+  margin-right: 5px;
 `;
 const UploadIcon = styled.img`
-hight: 20px;
-width: 20px;
-font-color: #ffffff;
-margin-right: 5px;
+  hight: 20px;
+  width: 20px;
+  font-color: #ffffff;
+  margin-right: 5px;
 `;
