@@ -85,7 +85,7 @@ const UnsubmittedSchedule = () => {
     },
   ];
 
-  // set the array of data for table rows to be the new state of data
+  // set the array of data for table rows to be the new state
   const data = result;
 
   // set an option column for filter purpose
@@ -112,7 +112,7 @@ const UnsubmittedSchedule = () => {
     const { email } = value;
     // const { email, employerCode } = value;
     try {
-      const url = "https://sandbox.findfood.ng/api/SubmittedSchedules/all";
+      const url = "https://sandbox.findfood.ng/api/UnsubmittedSchedules/all";
 
       const { data } = await axios({
         headers: {
@@ -140,12 +140,8 @@ const UnsubmittedSchedule = () => {
         allowEscapeKey: false,
         // timer: 1500
       }).then(() => {
-        // console.log(JSON.stringify(data.data));
         console.log(data.data);
-        // setResult(data.data);
       });
-      // navigate("/unsubmitted-schedules")
-      console.log(result);
       console.log(fakeData);
     } catch (error) {
       console.log(error);
@@ -176,7 +172,7 @@ const UnsubmittedSchedule = () => {
           /> */}
           <ClientId
             type="email"
-            placeholder="Client Id"
+            placeholder="Email"
             {...register("email", {
               required: "This is a required field",
             })}
