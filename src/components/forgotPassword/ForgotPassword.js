@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { FaEnvelopeOpen} from "react-icons/fa";
+import React, { useState } from "react";
+import { FaEnvelopeOpen } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -39,7 +39,7 @@ function ResetPassword({ toggleForm }) {
 
   // resetPassword with react-hook-form
   const resetSchema = yup.object().shape({
-    email: yup.string().required("Email address cannot be empty"),
+    email: yup.string().required("Enter a valid email address"),
   });
 
   const {
@@ -54,8 +54,13 @@ function ResetPassword({ toggleForm }) {
   const navigate = useNavigate();
   // function for submitting reset form
   const onSubmit = handleSubmit(async (value) => {
-    console.log(value);
+    // console.log(value);
     const { email } = value;
+    if (errors.email) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
       const url = "https://sandbox.findfood.ng/api/Partners/forgottenpassword";
 
@@ -104,37 +109,48 @@ function ResetPassword({ toggleForm }) {
   return (
     <SignUpWrapper>
       {loading ? (
-                <ClipLoader
-                // color={color}
-                loading={loading}
-                cssOverride={override}
-                size={10}
-              />
+        <ClipLoader
+          // color={color}
+          loading={loading}
+          cssOverride={override}
+          size={10}
+        />
       ) : (
         <SignUpContent>
-        <SignUpHeader>forgot password</SignUpHeader>
-        <InputWrapper>
-          <FaEnvelopeOpen
-            marginLeft="50px"
-            marginRight="50px"
-            color="#000000"
-          />
-          <Input placeholder="Email" {...register("email", { required: "This is required" })} />
-        </InputWrapper>
-        <Button
-          type="submit"
-          onClick={() => {
-            setLoading(!loading);
-            onSubmit();
-          }}
-        >
-          <Text>Send</Text>
-        </Button>
-        <Switcher>
-          Already have an account?
-          <span onClick={toggleForm}>Sign In</span>
-        </Switcher>
-      </SignUpContent>
+          <SignUpHeader>forgot password</SignUpHeader>
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+            }}
+          >
+            {errors.email && errors.email.message}
+          </p>
+          <InputWrapper>
+            <FaEnvelopeOpen
+              marginLeft="50px"
+              marginRight="50px"
+              color="#000000"
+            />
+            <Input
+              placeholder="Email"
+              {...register("email", { required: "This is required" })}
+            />
+          </InputWrapper>
+          <Button
+            type="submit"
+            onClick={() => {
+              // setLoading(!loading);
+              onSubmit();
+            }}
+          >
+            <Text>Send</Text>
+          </Button>
+          <Switcher>
+            Already have an account?
+            <span onClick={toggleForm}>Sign In</span>
+          </Switcher>
+        </SignUpContent>
       )}
     </SignUpWrapper>
   );

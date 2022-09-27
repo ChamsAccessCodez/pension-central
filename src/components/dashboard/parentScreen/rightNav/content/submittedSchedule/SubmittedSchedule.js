@@ -199,7 +199,7 @@ const SubmittedSchedule = () => {
         </Submit>
       </FormHolder>
       <UnsubmittedSchedulesResult>
-        {result.map((res, index) => (
+        {/* {result.map((res, index) => (
           <div key={index}>
             <MUIDataTable
               title={"Employee List"}
@@ -208,7 +208,38 @@ const SubmittedSchedule = () => {
               options={options}
             />
           </div>
-        ))}
+        ))} */}
+        {data.length === 0 ? (
+          <div
+            style={{
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            You don't have any{" "}
+            <span
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              submitted schedule
+            </span>{" "}
+            yet.
+          </div>
+        ) : (
+          <>
+            {result.map((res, index) => (
+              <div key={index}>
+                <MUIDataTable
+                  title={"Employee List"}
+                  data={data}
+                  columns={columns}
+                  options={options}
+                />
+              </div>
+            ))}
+          </>
+        )}
       </UnsubmittedSchedulesResult>
     </UnsubmittedWrapper>
   );
@@ -217,7 +248,7 @@ const SubmittedSchedule = () => {
 export default SubmittedSchedule;
 
 const UnsubmittedWrapper = styled.div`
-  background: #FFF8CE;
+  background: #fff8ce;
   width: 90%;
   height: auto;
   display: flex;
@@ -278,24 +309,26 @@ const EmployeeCode = styled.input`
   }
 `;
 const Submit = styled.button`
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  background: green;
-  // background: #82c7fe;
-  border-radius: 5px;
-  height: 45px;
-  font-family: Poppins;
-  font-weight: 500;
-  color: white;
-  margin-left: 5px;
+width: 100px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+border: none;
+background: green;
+// background: #82c7fe;
+border-radius: 5px;
+height: 43px;
+font-family: Poppins;
+font-weight: 500;
+color: white;
+margin-left: 5px;
+transition: background 1s;
 
-  :hover {
-    border: 1px solid #ffffff;
-  }
+:hover {
+  //   // border: 1px solid #ffffff;
+    background: #206cb1;
+}
 `;
 const FormHolder = styled.div`
   width: inherit;

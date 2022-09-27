@@ -39,9 +39,9 @@ function SignUp({ toggle }) {
 
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
-    companyName: yup.string().required("Company name cannot be empty"),
-    email: yup.string().required("Email address cannot be empty"),
-    phone: yup.string().required("Phone cannot be empty"),
+    companyName: yup.string().required("Enter companyName"),
+    email: yup.string().required("Enter a valid email address"),
+    phone: yup.string().required("Enter a valid phone number"),
   });
 
   const {
@@ -49,7 +49,6 @@ function SignUp({ toggle }) {
     handleSubmit,
     formState: { errors },
     reset,
-    // } = useForm();
   } = useForm({
     resolver: yupResolver(userSchema),
   });
@@ -58,8 +57,13 @@ function SignUp({ toggle }) {
   // function for submitting form
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
-
     const { companyName, email, phone } = value;
+
+    if (errors.companyName || errors.email || errors.phone) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
 
     try {
       const url = "https://sandbox.findfood.ng/api/Partners/signup";
@@ -108,6 +112,8 @@ function SignUp({ toggle }) {
         window.location.reload(false);
       });
     }
+    // reset the input
+    reset();
   });
 
   return (
@@ -123,38 +129,68 @@ function SignUp({ toggle }) {
         <SignUpContent>
           {/* <PensionLogo src={PenLogo} alt="happy girl" /> */}
           <SignUpHeader>sign up</SignUpHeader>
-          <ErrorMessage
-            errors={errors}
-            name="companyName"
-            message="Company name is required."
-          />
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+            }}
+          >
+            {errors.companyName && errors.companyName.message}
+          </p>
           <InputWrapper>
             <FaHouseUser marginLeft="50px" marginRight="50px" color="#000000" />
             <Input
               placeholder="Company Name"
-              {...register("companyName", {
-                required: "This is a required field",
-              })}
+              type="text"
+              name="companyName"
+              {...register("companyName")}
+              required
             />
           </InputWrapper>
-          {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+            }}
+          >
+            {errors.email && errors.email.message}
+          </p>
           <InputWrapper>
             <FaEnvelopeOpen
               marginLeft="50px"
               marginRight="50px"
               color="#000000"
             />
-            <Input placeholder="Email" {...register("email")} />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              {...register("email")}
+            />
           </InputWrapper>
-          {/* <ErrorMessage>{errors.phone.message}</ErrorMessage> */}
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+            }}
+          >
+            {errors.phone && errors.phone.message}
+          </p>
           <InputWrapper>
             <FaPhoneAlt marginLeft="50px" marginRight="50px" color="#000000" />
-            <Input placeholder="Phone" {...register("phone")} />
+            <Input
+              placeholder="Phone"
+              name="phone"
+              type="phone"
+              {...register("phone")}
+              required
+            />
           </InputWrapper>
           <Button
             type="submit"
             onClick={() => {
-              setLoading(!loading);
+              // setLoading(!loading);
               onSubmit();
             }}
           >

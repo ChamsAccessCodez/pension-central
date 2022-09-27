@@ -143,11 +143,15 @@ const UploadSchedule = () => {
           position: "center",
           icon: "success",
           title: res.data.responseMessage,
+          // title: res.data.data.bank.bankName,
+          // title: res.data.data.bank.accountNumber,
+          // title: res.data.data.bank.bankCbnCode,
           text: "Your schedule has been uploaded successfully.",
           allowOutsideClick: false,
           allowEscapeKey: false,
           showConfirmButton: true,
         });
+
         console.log(res);
         setFile("");
       })

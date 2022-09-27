@@ -22,6 +22,7 @@ import {
   Switcher2,
 } from "./SignInStyle";
 import { user } from "../Globals/Reducers";
+import e from "cors";
 
 // loader CSS
 const override = {
@@ -46,8 +47,8 @@ function SignIn({ toggle }) {
 
   // userSignIn with react-hook-form
   const userSchema = yup.object().shape({
-    email: yup.string().required("Email address cannot be empty"),
-    secret: yup.string().required("Secret cannot be empty"),
+    email: yup.string().required("Enter a valid email address"),
+    secret: yup.string().required("Enter a valid secret key"),
   });
 
   const {
@@ -64,10 +65,15 @@ function SignIn({ toggle }) {
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
     const { email, secret } = value;
+    if (errors.secret) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
       const url = "https://sandbox.findfood.ng/api/SubmitSchedules/auth";
 
-      const { data} = await axios({
+      const { data } = await axios({
         headers: {
           "Content-Type": "application/json",
           Accept: "*",
@@ -87,23 +93,23 @@ function SignIn({ toggle }) {
         // title: "Successful",
         text: "Explore your dashboard!!!",
         allowOutsideClick: false,
-        allowEscapeKey: false
+        allowEscapeKey: false,
       }).then(() => {
         dispatch(user(data));
         // console.log(data.responseMessage);
         navigate("/dashboard");
       });
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       Swal.fire({
         position: "center",
         icon: "error",
         // title: "Oops...",
         text: "Wrong email or secreteKey",
-        showConfirmButton: false,
+        showConfirmButton: true,
         allowOutsideClick: false,
         allowEscapeKey: false,
-        timer: 2000,
+        // timer: 2000,
       }).then(() => {
         reset();
         navigate("/");
@@ -128,8 +134,16 @@ function SignIn({ toggle }) {
             <ResetPassword toggleForm={toggleForm} />
           ) : (
             <SignUpWrapper>
-              <SignUpContent>
+              <SignUpContent onSubmit={onSubmit}>
                 <SignUpHeader>sign in</SignUpHeader>
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "10px",
+                  }}
+                >
+                  {errors.email && errors.email.message}
+                </p>
                 <InputWrapper>
                   <FaEnvelopeOpen
                     marginLeft="50px"
@@ -137,10 +151,21 @@ function SignIn({ toggle }) {
                     color="#000000"
                   />
                   <Input
+                    name="email"
+                    type="email"
                     placeholder="Email"
-                    {...register("email", { required: "This is required" })}
+                    {...register("email")}
+                    required
                   />
                 </InputWrapper>
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "10px",
+                  }}
+                >
+                  {errors.secret && errors.secret.message}
+                </p>
                 <InputWrapper>
                   <FaLock
                     marginLeft="50px"
@@ -148,15 +173,17 @@ function SignIn({ toggle }) {
                     color="#000000"
                   />
                   <Input
+                    name="secret"
                     type="password"
                     placeholder="Secret Key"
-                    {...register("secret", { required: "This is required" })}
+                    {...register("secret")}
+                    required
                   />
                 </InputWrapper>
                 <Button
                   type="submit"
                   onClick={() => {
-                    setLoading(!loading);
+                    // setLoading(true);
                     onSubmit();
                   }}
                 >

@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Onboarding from "../src/components/onboarding/Onboarding";
-import Dashboard from "../src/components/dashboard/parentScreen/ParentScreen";
-import ResetPassword from "../src/components/resetPassword/ResetPassword";
-import ResetPassword2 from "../src/components/resetPassword/ResetPassword2";
-import PasswordReset from "../src/components/dashboard/navRoutes/PasswordResetRoute"
+import Onboarding from "./components/onboarding/Onboarding";
+import Dashboard from "./components/dashboard/parentScreen/ParentScreen";
+import ResetPassword from "./components/resetPassword/ResetPassword";
+import ResetPassword2 from "./components/resetPassword/ResetPassword2";
+import PasswordReset from "./components/dashboard/navRoutes/PasswordResetRoute"
 import UploadSchedules from "./components/dashboard/navRoutes/UploadRoute";
 import UnsubmittedSchedules from "./components/dashboard/navRoutes/UnsubmittedRoute";
 import SubmittedSchedules from "./components/dashboard/navRoutes/SubmittedRoute";

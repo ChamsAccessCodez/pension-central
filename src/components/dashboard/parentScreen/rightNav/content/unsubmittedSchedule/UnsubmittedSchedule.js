@@ -140,9 +140,8 @@ const UnsubmittedSchedule = () => {
         allowEscapeKey: false,
         // timer: 1500
       }).then(() => {
-        console.log(data.data);
+        console.log(data);
       });
-      console.log(fakeData);
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -178,20 +177,6 @@ const UnsubmittedSchedule = () => {
             })}
           />
         </FormHolder1>
-        {/* <FormHolder1>
-          <ErrorMessage
-            errors={errors}
-            name="employerCode"
-            message="Employee Code is required."
-          />
-          <EmployeeCode
-            type="text"
-            placeholder="Employee Code"
-            {...register("employerCode", {
-              required: "This is a required field",
-            })}
-          />
-        </FormHolder1> */}
         <Submit
           type="submit"
           onClick={() => {
@@ -203,16 +188,37 @@ const UnsubmittedSchedule = () => {
         </Submit>
       </FormHolder>
       <UnsubmittedSchedulesResult>
-        {result.map((res, index) => (
-          <div key={index}>
-            <MUIDataTable
-              title={"Employee List"}
-              data={data}
-              columns={columns}
-              options={options}
-            />
+        {data.length === 0 ? (
+          <div
+            style={{
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            You don't have any{" "}
+            <span
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              unsubmitted schedule
+            </span>{" "}
+            yet.
           </div>
-        ))}
+        ) : (
+          <>
+            {result.map((res, index) => (
+              <div key={index}>
+                <MUIDataTable
+                  title={"Employee List"}
+                  data={data}
+                  columns={columns}
+                  options={options}
+                />
+              </div>
+            ))}
+          </>
+        )}
       </UnsubmittedSchedulesResult>
     </UnsubmittedWrapper>
   );
@@ -291,14 +297,16 @@ const Submit = styled.button`
   background: green;
   // background: #82c7fe;
   border-radius: 5px;
-  height: 45px;
+  height: 43px;
   font-family: Poppins;
   font-weight: 500;
   color: white;
   margin-left: 5px;
+  transition: background 1s;
 
   :hover {
-    border: 1px solid #ffffff;
+    //   // border: 1px solid #ffffff;
+      background: #206cb1;
   }
 `;
 const FormHolder = styled.div`

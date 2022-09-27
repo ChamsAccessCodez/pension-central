@@ -43,8 +43,8 @@ function ResetPassword() {
   // userSignUp with react-hook-form
   const userSchema = yup.object().shape({
     currentPassword: yup.string().required("Current Password cannot be empty"),
-    newPassword: yup.string().required("New Password cannot be empty"),
-    email: yup.string().required("Email address cannot be empty"),
+    newPassword: yup.string().required("Enter your new password"),
+    email: yup.string().required("Enter your registered email"),
   });
 
   const {
@@ -61,6 +61,11 @@ function ResetPassword() {
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
     const { currentPassword, newPassword, email } = value;
+    if (errors.currentPassword && errors.newPassword && errors.email) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
       const url = "https://sandbox.findfood.ng/api/Partners/changepassword";
 
@@ -81,21 +86,21 @@ function ResetPassword() {
           clientId: email,
         },
       });
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Password Changed Successfully",
-          text: "Login to your dashboard now!",
-          showConfirmButton: true,
-          // text: data.responseMessage,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        }).then(() => {
-          navigate("/");
-          window.location.reload(false);
-        });
-        console.log(data);
-        // console.log(data.responseMessage);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Password Changed Successfully",
+        text: "Login to your dashboard now!",
+        showConfirmButton: true,
+        // text: data.responseMessage,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then(() => {
+        navigate("/");
+        window.location.reload(false);
+      });
+      console.log(data);
+      // console.log(data.responseMessage);
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -116,78 +121,83 @@ function ResetPassword() {
 
   return (
     <BoardWrapper>
-        <BrandForm>
-          <SignUpWrapper>
-            {loading ? (
-              <ClipLoader
-                // color={color}
-                loading={loading}
-                cssOverride={override}
-                size={10}
-              />
-            ) : (
-              <SignUpContent>
-                <SignUpHeader>reset password</SignUpHeader>
-                <ErrorMessage
-                  errors={errors}
-                  name="currentPassword"
-                  message="Current password is required."
+      <BrandForm>
+        <SignUpWrapper>
+          {loading ? (
+            <ClipLoader
+              // color={color}
+              loading={loading}
+              cssOverride={override}
+              size={10}
+            />
+          ) : (
+            <SignUpContent>
+              <SignUpHeader>reset password</SignUpHeader>
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "10px",
+                }}
+              >
+                {errors.currentPassword && errors.currentPassword.message}
+              </p>
+              <InputWrapper>
+                <FaLock marginLeft="50px" marginRight="50px" color="#000000" />
+                <Input
+                  placeholder="Current Password"
+                  type="password"
+                  {...register("currentPassword", {
+                    required: "This is a required field",
+                  })}
                 />
-                <InputWrapper>
-                  <FaLock
-                    marginLeft="50px"
-                    marginRight="50px"
-                    color="#000000"
-                  />
-                  <Input
-                    placeholder="Current Password"
-                    type="password"
-                    {...register("currentPassword", {
-                      required: "This is a required field",
-                    })}
-                  />
-                </InputWrapper>
-                <ErrorMessage
-                  errors={errors}
-                  name="newPassword"
-                  message="New password is required."
+              </InputWrapper>
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "10px",
+                }}
+              >
+                {errors.newPassword && errors.newPassword.message}
+              </p>
+              <InputWrapper>
+                <FaLock marginLeft="50px" marginRight="50px" color="#000000" />
+                <Input
+                  placeholder="New Password"
+                  type="password"
+                  {...register("newPassword", {
+                    required: "This is a required field",
+                  })}
                 />
-                <InputWrapper>
-                  <FaLock
-                    marginLeft="50px"
-                    marginRight="50px"
-                    color="#000000"
-                  />
-                  <Input
-                    placeholder="New Password"
-                    type="password"
-                    {...register("newPassword", {
-                      required: "This is a required field",
-                    })}
-                  />
-                </InputWrapper>
-                {/* <ErrorMessage>{errors.email.message}</ErrorMessage> */}
-                <InputWrapper>
-                  <FaEnvelopeOpen
-                    marginLeft="50px"
-                    marginRight="50px"
-                    color="#000000"
-                  />
-                  <Input placeholder="Email" {...register("email")} />
-                </InputWrapper>
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    setLoading(!loading);
-                    onSubmit();
-                  }}
-                >
-                  <Text>send</Text>
-                </Button>
-              </SignUpContent>
-            )}
-          </SignUpWrapper>
-        </BrandForm>
+              </InputWrapper>
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "10px",
+                }}
+              >
+                {errors.email && errors.email.message}
+              </p>
+              <InputWrapper>
+                <FaEnvelopeOpen
+                  marginLeft="50px"
+                  marginRight="50px"
+                  color="#000000"
+                />
+                <Input placeholder="Email" {...register("email")} />
+              </InputWrapper>
+              <Button
+                type="submit"
+                onClick={() => {
+                  // setLoading(!loading);
+                  onSubmit();
+                }}
+              >
+                <Text>send</Text>
+              </Button>
+            </SignUpContent>
+          )}
+        </SignUpWrapper>
+      </BrandForm>
     </BoardWrapper>
   );
 }
