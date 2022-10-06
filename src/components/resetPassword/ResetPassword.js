@@ -152,6 +152,7 @@ function ResetPassword() {
                   style={{
                     color: "red",
                     fontSize: "10px",
+                    marginBottom: "2px",
                   }}
                 >
                   {errors.currentPassword && errors.currentPassword.message}
@@ -175,6 +176,7 @@ function ResetPassword() {
                   style={{
                     color: "red",
                     fontSize: "10px",
+                    marginBottom: "2px",
                   }}
                 >
                   {errors.newPassword && errors.newPassword.message}
@@ -197,6 +199,7 @@ function ResetPassword() {
                   style={{
                     color: "red",
                     fontSize: "10px",
+                    marginBottom: "2px",
                   }}
                 >
                   {errors.email && errors.email.message}

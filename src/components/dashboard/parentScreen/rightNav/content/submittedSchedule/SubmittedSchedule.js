@@ -7,11 +7,24 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from "sweetalert2";
 import MUIDataTable from "mui-datatables";
+import ClipLoader from "react-spinners/BeatLoader";
+
+// loader CSS
+const override = {
+  width: "inherit",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  alignSelf: "center",
+};
 
 const SubmittedSchedule = () => {
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(false);
     onSubmit();
   }, []);
   // variable to store the data gotten from the endpoint
@@ -95,7 +108,7 @@ const SubmittedSchedule = () => {
   // end of material ui construct.
 
   const scheduleSchema = yup.object().shape({
-    email: yup.string().required("Email address cannot be empty"),
+    email: yup.string().required("Enter correct email address"),
   });
   const {
     register,
@@ -109,6 +122,11 @@ const SubmittedSchedule = () => {
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
     const { email } = value;
+    if (errors.email) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     try {
       const url = "https://sandbox.findfood.ng/api/SubmittedSchedules/all";
 
@@ -137,6 +155,8 @@ const SubmittedSchedule = () => {
         allowEscapeKey: false,
         // timer: 1500
       }).then(() => {
+        reset();
+        setLoading(false);
         console.log(fakeData);
       });
     } catch (error) {
@@ -161,17 +181,20 @@ const SubmittedSchedule = () => {
     <UnsubmittedWrapper>
       <FormHolder>
         <FormHolder1>
-          {/* <ErrorMessage
-            errors={errors}
-            name="email"
-            message="email name is required."
-          /> */}
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+              marginBottom: "2px",
+            }}
+          >
+            {errors.email && errors.email.message}
+          </p>
           <ClientId
             type="email"
             placeholder="Email"
-            {...register("email", {
-              required: "This is a required field",
-            })}
+            {...register("email")}
+            required
           />
         </FormHolder1>
         {/* <FormHolder1>
@@ -191,7 +214,6 @@ const SubmittedSchedule = () => {
         <Submit
           type="submit"
           onClick={() => {
-            // setLoading(!loading);
             onSubmit();
           }}
         >
@@ -199,45 +221,47 @@ const SubmittedSchedule = () => {
         </Submit>
       </FormHolder>
       <UnsubmittedSchedulesResult>
-        {/* {result.map((res, index) => (
-          <div key={index}>
-            <MUIDataTable
-              title={"Employee List"}
-              data={data}
-              columns={columns}
-              options={options}
-            />
-          </div>
-        ))} */}
-        {data.length === 0 ? (
-          <div
-            style={{
-              marginTop: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            You don't have any{" "}
-            <span
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              submitted schedule
-            </span>{" "}
-            yet.
-          </div>
+        {loading ? (
+          <ClipLoader
+            color={"green"}
+            loading={loading}
+            cssOverride={override}
+            size={10}
+          />
         ) : (
           <>
-            {result.map((res, index) => (
-              <div key={index}>
-                <MUIDataTable
-                  title={"Employee List"}
-                  data={data}
-                  columns={columns}
-                  options={options}
-                />
+            {data.length === 0 ? (
+              <div
+                style={{
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                You don't have any{" "}
+                <span
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  submitted schedule
+                </span>{" "}
+                yet.
               </div>
-            ))}
+            ) : (
+              <>
+                {result.map((res, index) => (
+                  <div key={index} style={{width: "100%"}}>
+                    <MUIDataTable
+                      title={"Employee List"}
+                      data={data}
+                      columns={columns}
+                      options={options}
+                    />
+                  </div>
+                ))}
+                {/* {data.length} */}
+              </>
+            )}
           </>
         )}
       </UnsubmittedSchedulesResult>
@@ -257,33 +281,7 @@ const UnsubmittedWrapper = styled.div`
   align-items: center;
 `;
 const ClientId = styled.input`
-  width: 400px;
-  height: 40px;
-  outline: none;
-  border: 1px solid #d1d1d1;
-  border-radius: 5px;
-  padding-left: 5px;
-
-  ::placeholder {
-    padding-left: 10px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 16px;
-    color: rgba(0, 0, 0, 0.39);
-  }
-
-  :active {
-    border: 1px solid #82c7fe;
-  }
-  :hover {
-    border: 1px solid #82c7fe;
-  }
-`;
-const EmployeeCode = styled.input`
-  height: 40px;
-  width: 400px;
+  // background: red;
   width: 400px;
   height: 40px;
   outline: none;
@@ -309,37 +307,39 @@ const EmployeeCode = styled.input`
   }
 `;
 const Submit = styled.button`
-width: 100px;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-border: none;
-background: green;
-// background: #82c7fe;
-border-radius: 5px;
-height: 43px;
-font-family: Poppins;
-font-weight: 500;
-color: white;
-margin-left: 5px;
-transition: background 1s;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  cursor: pointer;
+  border: none;
+  background: green;
+  // background: #82c7fe;
+  border-radius: 5px;
+  height: 43px;
+  font-family: Poppins;
+  font-weight: 500;
+  color: white;
+  margin-left: 5px;
+  transition: background 1s;
 
-:hover {
-  //   // border: 1px solid #ffffff;
+  :hover {
+    //   // border: 1px solid #ffffff;
     background: #206cb1;
-}
+  }
 `;
 const FormHolder = styled.div`
   width: inherit;
-  // background: red;
+  // background: green;
   display: flex;
   justify-content: center;
   // justify-content: space-around;
   align-items: center;
   margin-top: 30px;
   margin-bottom: 30px;
-  height: 50px;
+  height: auto;
+  // height: 80px;
 `;
 const FormHolder1 = styled.div`
   // width: inherit;
@@ -360,10 +360,4 @@ const UnsubmittedSchedulesResult = styled.div`
   // justify-content: space-around;
   align-items: center;
   margin-bottom: 30px;
-`;
-const ErrorMessage = styled.div`
-  font-size: smaller;
-  color: red;
-  width: 100%;
-  margin-bottom: 5px;
 `;

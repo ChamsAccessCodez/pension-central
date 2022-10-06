@@ -133,6 +133,7 @@ function SignUp({ toggle }) {
             style={{
               color: "red",
               fontSize: "10px",
+              marginBottom: "2px",
             }}
           >
             {errors.companyName && errors.companyName.message}
@@ -151,6 +152,7 @@ function SignUp({ toggle }) {
             style={{
               color: "red",
               fontSize: "10px",
+              marginBottom: "2px",
             }}
           >
             {errors.email && errors.email.message}
@@ -173,6 +175,7 @@ function SignUp({ toggle }) {
             style={{
               color: "red",
               fontSize: "10px",
+              marginBottom: "2px",
             }}
           >
             {errors.phone && errors.phone.message}

@@ -122,6 +122,7 @@ function ResetPassword({ toggleForm }) {
             style={{
               color: "red",
               fontSize: "10px",
+              marginBottom: "2px",
             }}
           >
             {errors.email && errors.email.message}

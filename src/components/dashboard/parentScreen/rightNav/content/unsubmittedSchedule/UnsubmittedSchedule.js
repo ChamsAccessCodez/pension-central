@@ -7,9 +7,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from "sweetalert2";
 import MUIDataTable from "mui-datatables";
+import ClipLoader from "react-spinners/BeatLoader";
 
 const UnsubmittedSchedule = () => {
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onSubmit();
@@ -95,7 +97,7 @@ const UnsubmittedSchedule = () => {
   // end of material ui construct.
 
   const scheduleSchema = yup.object().shape({
-    email: yup.string().required("Email address cannot be empty"),
+    email: yup.string().required("Enter the correct email address"),
     // employerCode: yup.string().required("Employee code cannot be empty"),
   });
   const {
@@ -110,6 +112,11 @@ const UnsubmittedSchedule = () => {
   const onSubmit = handleSubmit(async (value) => {
     // console.log(value);
     const { email } = value;
+    if (errors.email) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
     // const { email, employerCode } = value;
     try {
       const url = "https://sandbox.findfood.ng/api/UnsubmittedSchedules/all";
@@ -164,11 +171,15 @@ const UnsubmittedSchedule = () => {
     <UnsubmittedWrapper>
       <FormHolder>
         <FormHolder1>
-          {/* <ErrorMessage
-            errors={errors}
-            name="email"
-            message="email name is required."
-          /> */}
+          <p
+            style={{
+              color: "red",
+              fontSize: "10px",
+              marginBottom: "2px",
+            }}
+          >
+            {errors.email && errors.email.message}
+          </p>
           <ClientId
             type="email"
             placeholder="Email"
@@ -236,6 +247,7 @@ const UnsubmittedWrapper = styled.div`
   align-items: center;
 `;
 const ClientId = styled.input`
+  // background: red;
   width: 400px;
   height: 40px;
   outline: none;
@@ -260,38 +272,13 @@ const ClientId = styled.input`
     border: 1px solid #82c7fe;
   }
 `;
-const EmployeeCode = styled.input`
-  height: 40px;
-  width: 400px;
-  width: 400px;
-  height: 40px;
-  outline: none;
-  border: 1px solid #d1d1d1;
-  border-radius: 5px;
-  padding-left: 5px;
 
-  ::placeholder {
-    padding-left: 10px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 16px;
-    color: rgba(0, 0, 0, 0.39);
-  }
-
-  :active {
-    border: 1px solid #82c7fe;
-  }
-  :hover {
-    border: 1px solid #82c7fe;
-  }
-`;
 const Submit = styled.button`
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: flex-end;
   cursor: pointer;
   border: none;
   background: green;
@@ -306,19 +293,20 @@ const Submit = styled.button`
 
   :hover {
     //   // border: 1px solid #ffffff;
-      background: #206cb1;
+    background: #206cb1;
   }
 `;
 const FormHolder = styled.div`
   width: inherit;
-  // background: red;
+  // background: green;
   display: flex;
   justify-content: center;
   // justify-content: space-around;
   align-items: center;
   margin-top: 30px;
   margin-bottom: 30px;
-  height: 50px;
+  height: auto;
+  // height: 80px;
 `;
 const FormHolder1 = styled.div`
   // width: inherit;

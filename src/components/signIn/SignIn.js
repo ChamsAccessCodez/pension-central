@@ -140,6 +140,7 @@ function SignIn({ toggle }) {
                   style={{
                     color: "red",
                     fontSize: "10px",
+                    marginBottom: "2px",
                   }}
                 >
                   {errors.email && errors.email.message}
@@ -162,6 +163,7 @@ function SignIn({ toggle }) {
                   style={{
                     color: "red",
                     fontSize: "10px",
+                    marginBottom: "2px",
                   }}
                 >
                   {errors.secret && errors.secret.message}
