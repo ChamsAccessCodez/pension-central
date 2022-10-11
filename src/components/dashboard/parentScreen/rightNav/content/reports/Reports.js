@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from "sweetalert2";
 import MUIDataTable from "mui-datatables";
 import ClipLoader from "react-spinners/BeatLoader";
-import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import decoded from "jwt-decode";
 
 // loader CSS
 const override = {
@@ -23,6 +23,9 @@ const override = {
 const Reports = () => {
   const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const dispatch = useDispatch();
+  // get current user from persistReducer
+  const user = useSelector((state) => state.persistedReducer.current);
 
   // all endpoints
   // const scheduleStatusUrl = "https://sandbox.findfood.ng/api/Lookup/schedulestatuses";
@@ -30,6 +33,15 @@ const Reports = () => {
   // const paymentModeUrl = "https://sandbox.findfood.ng/api/Lookup/paymentmodes";
   // const paymentStatusUrl = "https://sandbox.findfood.ng/api/Lookup/paymentstatuses";
   // const lodgementIdUrl = "https://sandbox.findfood.ng/api/Reports/lodgement";
+
+  // exposing the token to get its content
+  let decoder;
+  if (user) {
+    const decode = user.token;
+    decoder = decoded(decode);
+  }
+  // console.log(decoder);
+  // console.log(decoder.unique_name);
 
   useEffect(() => {
     setLoading(false);
@@ -141,7 +153,7 @@ const Reports = () => {
     endDate: yup
       .date()
       .min(yup.ref("startDate"), "End date can't be before Start date"),
-    cancelled: yup.string().required("Select an option"),
+    // submitted: yup.string().required("Select an option"),
   });
   const {
     register,
@@ -172,25 +184,25 @@ const Reports = () => {
           // startDate: startDate.toISOString(),
           // endDate: endDate.toISOString(),
 
+          // clientId: decoder.unique_name,
           clientId: "ep@gmail.com",
-          employerCode: "0031",
         },
       });
       //fakeData = data.data;
       console.log(data);
       fakeData = data.data
         .filter((elem) => {
-          return elem.scheduleStatus == "Submitted";
-        })
-        .filter((elem) => {
-          return elem.paymentMode == "Electronic Bank Transfer";
-        })
-        .filter((elem) => {
           const date = new Date(elem.paymentDate);
           console.log(startDate, endDate, date);
-
+          // return the result when the payment date is less than the end date and the payment date is greater than the start date.
           return date < endDate && date > startDate;
-        });
+        })
+        // .filter((elem) => {
+        //   return elem.scheduleStatus === "Submitted";
+        // })
+        // .filter((elem) => {
+        //   return elem.paymentMode === "Electronic Bank Transfer";
+        // });
       setResult(fakeData);
 
       Swal.fire({
@@ -202,7 +214,6 @@ const Reports = () => {
         allowEscapeKey: false,
         // timer: 1500
       }).then((e) => {
-        // reset();
         setLoading(false);
       });
     } catch (error) {
@@ -220,15 +231,11 @@ const Reports = () => {
     }
   });
 
-  // get current user from persistReducer
-  const user = useSelector((state) => state.persistedReducer.current);
-
   return (
     <ReportWrapper>
       <FormWrapper>
         <FormTittle>report filter</FormTittle>
         <form
-          // action="www.google.com/search"
           style={{
             // background: "red",
             width: "90%",
@@ -265,7 +272,7 @@ const Reports = () => {
                 {...register("startDate")}
                 required
               />
-              <label
+              {/* <label
                 style={{
                   fontSize: "12px",
                   color: "grey",
@@ -280,8 +287,16 @@ const Reports = () => {
                 <option value="cancelled" {...register("cancelled")} required>
                   Cancelled
                 </option>
-                <option value="submitted">Submitted</option>
-                <option value="unsubmitted">Unsubmitted</option>
+                <option value="submitted" {...register("submitted")} required>
+                  Submitted
+                </option>
+                <option
+                  value="unsubmitted"
+                  {...register("unsubmitted")}
+                  required
+                >
+                  Unsubmitted
+                </option>
               </SelectStatus>
               <label
                 style={{
@@ -301,7 +316,7 @@ const Reports = () => {
                 <option value="wove-finance-transfer">
                   Woven Finance Transfer
                 </option>
-              </SelectStatus>
+              </SelectStatus> */}
             </FormA>
             <FormB>
               <label
@@ -320,7 +335,7 @@ const Reports = () => {
                 {...register("endDate")}
                 required
               />
-              <label
+              {/* <label
                 style={{
                   fontSize: "12px",
                   color: "grey",
@@ -356,7 +371,7 @@ const Reports = () => {
                 <option value="wove-finance-transfer">
                   Woven Finance Transfer
                 </option>
-              </SelectStatus>
+              </SelectStatus> */}
             </FormB>
           </FormDivide>
           <Submit
@@ -394,7 +409,7 @@ const Reports = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  report
+                  report.
                 </span>{" "}
                 yet.
               </div>
@@ -410,7 +425,6 @@ const Reports = () => {
                     />
                   </div>
                 ))}
-                {data.length}
               </>
             )}
           </>
