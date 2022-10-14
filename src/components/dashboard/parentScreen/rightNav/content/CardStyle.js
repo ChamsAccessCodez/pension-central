@@ -34,7 +34,6 @@ export const NavCard = styled.div`
 export const NavCardContainer = styled(NavLink)`
   width: 239px;
   height: 157px;
-  background: #d0e9fd;
   border-radius: 6px;
   display: flex;
   flex-direction: column;

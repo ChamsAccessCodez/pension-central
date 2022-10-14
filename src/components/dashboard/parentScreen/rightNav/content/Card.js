@@ -119,7 +119,9 @@ const Card = ({ dashWord, submitWord, unsubmitWord, reportWord, passWord }) => {
         <NavName>Dashboard</NavName>
       )}
       <NavCard>
-        <NavCardContainer to="/upload-schedules">
+        <NavCardContainer to="/upload-schedules" style={{
+            background: "#d0e9fd",
+          }}>
           <UploadIcon src={uploadIcon} alt=" Icon Sample" />
           <Figure>70+</Figure>
           <Name>Upload Schedules</Name>
