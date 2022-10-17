@@ -30,12 +30,12 @@ const data = [
   },
   {
     name: "lodgementReferenceNo",
-    pv: 3908,
+    pv: 7008,
     amt: 2000,
   },
   {
     name: "employerName",
-    pv: 4800,
+    pv: 6000,
     amt: 2181,
   },
   {
@@ -46,27 +46,27 @@ const data = [
   {
     name: "recordCount",
     dateResult: 3490,
-    pv: 4300,
+    pv: 1100,
     amt: 2100,
   },
   {
     name: "amount",
-    pv: 4300,
+    pv: 4000,
     amt: 2100,
   },
   {
     name: "scheduleStatus",
-    pv: 4300,
+    pv: 2200,
     amt: 3000,
   },
   {
     name: "paymentStatus",
-    pv: 4300,
+    pv: 1300,
     amt: 1819,
   },
   {
     name: "lodgementId",
-    pv: 4300,
+    pv: 4900,
     amt: 2829,
   },
 ];
@@ -83,8 +83,8 @@ const Normal = () => {
           height={500}
           data={data}
           margin={{
-            top: 5,
-            right: 0,
+            top: 10,
+            right: 30,
             left: 0,
             bottom: 5,
           }}
@@ -106,7 +106,7 @@ const Normal = () => {
       <WrapperTwo>
         <BarChart width={600} height={500} data={data}>
           {data.map((item) => (
-            <XAxis dataKey="name" />
+            <XAxis dataKey="amt" />
           ))}
           <YAxis />
           <Tooltip />
@@ -128,6 +128,7 @@ const NormalWrapper = styled.div`
   width: 90%;
   height: 60vh;
   display: flex;
+  gap: 40px;
 `;
 
 const WrapperOne = styled.div`
