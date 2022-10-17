@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import {
   HeaderWrapper,
   One,
@@ -29,8 +29,7 @@ const Header = () => {
     const decode = user.token;
     decoder = decoded(decode);
   }
-
-  console.log(decoder);
+  // console.log(decoder);
 
   return (
     <HeaderWrapper>

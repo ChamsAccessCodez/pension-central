@@ -144,8 +144,6 @@ const UploadSchedule = () => {
           icon: "success",
           title: res.data.responseMessage,
           // title: res.data.data.bank.bankName,
-          // title: res.data.data.bank.accountNumber,
-          // title: res.data.data.bank.bankCbnCode,
           text: "Your schedule has been uploaded successfully.",
           allowOutsideClick: false,
           allowEscapeKey: false,
@@ -195,37 +193,40 @@ const UploadSchedule = () => {
           onSubmit={handleSubmit}
         >
           <InputRow>
-            <RealInput
-              type="file"
-              accept=".xlsx"
-              placeholder="Choose file"
-              onChange={handleChange}
-              style={{
-                display: "none",
-              }}
-            />
-            <p
-              style={{
-                paddingLeft: "10px",
-                fontFamily: "Poppins",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "12px",
-                color: "rgba(0, 0, 0, 0.39)",
-              }}
-            >
-              Choose File
-            </p>
-            <span
-              style={{
-                color: "green",
-                fontSize: "12px",
-              }}
-            >
-              {/* {console.log(file && file.name)} */}
-              {file && file.name}
-            </span>
-            <Browse>browse</Browse>
+          <RealInput
+            type="file"
+            accept=".xlsx"
+            placeholder="Choose file"
+            onChange={handleChange}
+            style={{
+              display: "none",
+            }}
+          />
+          <p
+            style={{
+              paddingLeft: "10px",
+              fontFamily: "Poppins",
+              fontStyle: "normal",
+              fontWeight: "400",
+              fontSize: "12px",
+              color: "rgba(0, 0, 0, 0.39)",
+            }}
+          >
+            Choose File
+          </p>
+          <span
+            style={{
+              color: "green",
+              fontSize: "12px",
+            }}
+          >
+            {console.log(file && file.name)}
+            {file && file.name}
+          </span>
+          <Browse
+          >
+            browse
+          </Browse>
           </InputRow>
           <ActionRow>
             <DownloadSchedule
