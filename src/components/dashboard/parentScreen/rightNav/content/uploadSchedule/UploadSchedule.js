@@ -10,6 +10,7 @@ import decoded from "jwt-decode";
 import FileDownload from "js-file-download";
 import downloadIcon from "../../../../../../images/downloadIcon.png";
 import uploadIcon from "../../../../../../images/uploadIcon1.png";
+import { Details } from "@material-ui/icons";
 
 const UploadSchedule = () => {
   const user = useSelector((state) => state.persistedReducer.current);
@@ -143,7 +144,14 @@ const UploadSchedule = () => {
           position: "center",
           icon: "success",
           title: res.data.responseMessage,
+          html:
+            "<p>Title: Bank Details</p>" +
+            `<p>BankName: ${res.data.data.bank.bankName}</p>` +
+            `<p>AccountName: ${res.data.data.bank.accountName}</p>` +
+            `<p>AccountNumber: ${res.data.data.bank.accountNumber}</p>`,
           // title: res.data.data.bank.bankName,
+          // title: res.data.data.bank.accountName,
+          // title: res.data.data.bank.accountNumber,
           text: "Your schedule has been uploaded successfully.",
           allowOutsideClick: false,
           allowEscapeKey: false,
@@ -151,6 +159,9 @@ const UploadSchedule = () => {
         });
 
         console.log(res);
+        console.log(res.data.data.bank.bankName);
+        console.log(res.data.data.bank.accountName);
+        console.log(res.data.data.bank.accountNumber);
         setFile("");
       })
       .catch((err) => {
@@ -193,40 +204,37 @@ const UploadSchedule = () => {
           onSubmit={handleSubmit}
         >
           <InputRow>
-          <RealInput
-            type="file"
-            accept=".xlsx"
-            placeholder="Choose file"
-            onChange={handleChange}
-            style={{
-              display: "none",
-            }}
-          />
-          <p
-            style={{
-              paddingLeft: "10px",
-              fontFamily: "Poppins",
-              fontStyle: "normal",
-              fontWeight: "400",
-              fontSize: "12px",
-              color: "rgba(0, 0, 0, 0.39)",
-            }}
-          >
-            Choose File
-          </p>
-          <span
-            style={{
-              color: "green",
-              fontSize: "12px",
-            }}
-          >
-            {console.log(file && file.name)}
-            {file && file.name}
-          </span>
-          <Browse
-          >
-            browse
-          </Browse>
+            <RealInput
+              type="file"
+              accept=".xlsx"
+              placeholder="Choose file"
+              onChange={handleChange}
+              style={{
+                display: "none",
+              }}
+            />
+            <p
+              style={{
+                paddingLeft: "10px",
+                fontFamily: "Poppins",
+                fontStyle: "normal",
+                fontWeight: "400",
+                fontSize: "12px",
+                color: "rgba(0, 0, 0, 0.39)",
+              }}
+            >
+              Choose File
+            </p>
+            <span
+              style={{
+                color: "green",
+                fontSize: "12px",
+              }}
+            >
+              {console.log(file && file.name)}
+              {file && file.name}
+            </span>
+            <Browse>browse</Browse>
           </InputRow>
           <ActionRow>
             <DownloadSchedule
