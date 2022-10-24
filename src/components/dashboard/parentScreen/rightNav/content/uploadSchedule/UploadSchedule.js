@@ -10,7 +10,6 @@ import decoded from "jwt-decode";
 import FileDownload from "js-file-download";
 import downloadIcon from "../../../../../../images/downloadIcon.png";
 import uploadIcon from "../../../../../../images/uploadIcon1.png";
-import { Details } from "@material-ui/icons";
 
 const UploadSchedule = () => {
   const user = useSelector((state) => state.persistedReducer.current);
@@ -148,10 +147,8 @@ const UploadSchedule = () => {
             "<p>Title: Bank Details</p>" +
             `<p>BankName: ${res.data.data.bank.bankName}</p>` +
             `<p>AccountName: ${res.data.data.bank.accountName}</p>` +
-            `<p>AccountNumber: ${res.data.data.bank.accountNumber}</p>`,
-          // title: res.data.data.bank.bankName,
-          // title: res.data.data.bank.accountName,
-          // title: res.data.data.bank.accountNumber,
+            `<p>AccountNumber: ${res.data.data.bank.accountNumber}</p>` +
+            `<p>Amount: ${res.data.data.grandTotal}</p>`,
           text: "Your schedule has been uploaded successfully.",
           allowOutsideClick: false,
           allowEscapeKey: false,
